@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mapMenu"
+            android:icon="@drawable/baseline_room_black_24dp"
+            android:title="MAP" />
+        <item
+            android:id="@+id/addMenu"
+            android:icon="@drawable/baseline_home_black_24dp"
+            android:title="Add House" />
+    </group>
+</menu>

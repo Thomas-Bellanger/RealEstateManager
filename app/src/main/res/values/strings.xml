@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Real Estate Manager</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="convert">convert</string>
+    <string name="edit">edit</string>
+    <string name="search">search</string>
+
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="can_t_show_the_map">Can\'t show the map</string>
+
+    <string name="access_token">pk.eyJ1IjoibmV4aXNsdWNpcyIsImEiOiJja3k0ZXFkNmwwN240MnZxYzlybm5tNmJwIn0.hWrbWExHjXPP2I0O7CXIGA</string>
+
+</resources>
