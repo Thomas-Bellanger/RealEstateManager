@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
+import com.openclassrooms.realestatemanager.BuildConfig
 import com.openclassrooms.realestatemanager.R
 
 class MapActivity : AppCompatActivity() {
@@ -11,8 +12,8 @@ class MapActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Mapbox.getInstance(this, BuildConfig.MAP_KEY)
         setContentView(R.layout.activity_map)
-        Mapbox.getInstance(applicationContext, getString(R.string.access_token))
         mMapView = findViewById(R.id.mapview)
         mMapView!!.onCreate(savedInstanceState)
     }

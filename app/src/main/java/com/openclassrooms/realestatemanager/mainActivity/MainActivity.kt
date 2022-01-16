@@ -15,6 +15,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.addActivity.AddActivity
 import com.openclassrooms.realestatemanager.detailActivity.DetailActivity
 import com.openclassrooms.realestatemanager.detailActivity.fragment.DetailFragment
+import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.editActivity.EditActivity
 import com.openclassrooms.realestatemanager.mainActivity.fragment.RecyclerViewFragment
 import com.openclassrooms.realestatemanager.mapActivity.MapActivity
@@ -29,10 +30,13 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     private lateinit var drawerLayout: DrawerLayout
     private val viewModel: ViewModel? = ViewModel.getInstance()
     private var navigationView: NavigationView? = null
+    private var homeManager:HomeManager? = HomeManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        homeManager!!.createHomeFirebase(HomeModel.testHome)
+        homeManager?.createHomeFirebase(HomeModel.testHome2)
         viewModel?.moneyType?.value = ViewModel.MoneyType.DOLLAR
         configureAndShowMainFragment()
         configureAndShowDetailFragment()
@@ -40,6 +44,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         configureDrawerLayout()
         onDrawerOpened()
         configureNavigationView()
+
     }
 
     private fun configureToolbar() {

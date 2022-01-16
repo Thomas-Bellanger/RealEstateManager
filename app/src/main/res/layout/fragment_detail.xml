@@ -1,185 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="3dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".detailActivity.fragment.DetailFragment"
     android:orientation="vertical"
-    tools:context=".detailActivity.fragment.DetailFragment">
+    android:layout_marginLeft="3dp">
 
     <TextView
         android:id="@+id/media"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Media"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:textSize="20sp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRooms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/media_list_item" />
-
+        tools:listitem="@layout/media_list_item"/>
     <TextView
         android:id="@+id/Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
         android:text="Description"
+        android:textStyle="bold"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"/>
 
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Some text...." />
+        android:text="Some text...."/>
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:orientation="horizontal">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <ImageView
+                    android:src="@drawable/baseline_api_black_24dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_api_black_24dp" />
-
+                    android:layout_height="match_parent" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Surface"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        android:text="Surface"/>
                     <TextView
                         android:id="@+id/detailSurface"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Text" />
+                        android:text="Text"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
 
 
                 </LinearLayout>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <ImageView
+                    android:src="@drawable/baseline_home_black_24dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_home_black_24dp" />
-
+                    android:layout_height="match_parent" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rooms"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="Rooms"/>
 
                     <TextView
                         android:id="@+id/detail_Rooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Text" />
+                        android:text="Text"/>
                 </LinearLayout>
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:src="@drawable/baseline_bathtub_black_24dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_bathtub_black_24dp" />
+                    android:layout_height="match_parent"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bathrooms"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="Bathrooms"/>
 
                     <TextView
                         android:id="@+id/detailBathrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Text" />
+                        android:text="Text"/>
                 </LinearLayout>
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <ImageView
+                    android:src="@drawable/baseline_bed_black_24dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_bed_black_24dp" />
-
+                    android:layout_height="match_parent" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bedrooms"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        android:text="Bedrooms"/>
                     <TextView
                         android:id="@+id/detailBedrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Text" />
+                        android:text="Text"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -189,59 +171,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/baseline_room_black_24dp" />
-
+            android:src="@drawable/baseline_room_black_24dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/detailLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/detailAdressNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adress Number" />
-
+                android:text="Adress Number"/>
             <TextView
                 android:id="@+id/detailAppartment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Appartment" />
-
+                android:text="Appartment"/>
             <TextView
                 android:id="@+id/detailCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="City" />
-
+                android:text="City"/>
             <TextView
                 android:id="@+id/detailPostal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Postal Code" />
-
+                android:text="Postal Code"/>
             <TextView
                 android:id="@+id/detailCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Country" />
+                android:text="Country"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/ic_launcher_background"/>
 
 </LinearLayout>

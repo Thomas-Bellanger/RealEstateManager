@@ -49,17 +49,13 @@ class DetailFragment : Fragment() {
         return view
     }
 
-    private fun adjustValue(home: HomeModel) {
+    private fun adjustValue(home:HomeModel){
         surface.text = home.surface.toString()
         rooms.text = home.roomNumber.toString()
         bathRooms.text = home.bathRoomNumber.toString()
         bedRooms.text = home.bedRoomNumber.toString()
         adressNumber.text = home.street
-        appartment.text = if (home.appartment != null) {
-            home.appartment
-        } else {
-            ""
-        }
+        appartment.text = if(home.appartment!=null) {home.appartment} else {""}
         city.text = home.city
         postalCode.text = home.postalCode
         country.text = home.country

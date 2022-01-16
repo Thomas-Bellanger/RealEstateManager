@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.detailActivity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.detailActivity.fragment.DetailFragment
@@ -37,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
             // C - Add it to FrameLayout container
             supportFragmentManager.beginTransaction()
                 .add(R.id.frameLayoutDetail, detailFragment!!)
+                .commit()
         }
     }
 }

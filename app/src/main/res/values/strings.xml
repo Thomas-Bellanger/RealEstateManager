@@ -10,7 +10,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="can_t_show_the_map">Can\'t show the map</string>
-
+    <!-- MapBoxToken -->
     <string name="access_token">pk.eyJ1IjoibmV4aXNsdWNpcyIsImEiOiJja3k0ZXFkNmwwN240MnZxYzlybm5tNmJwIn0.hWrbWExHjXPP2I0O7CXIGA</string>
 
 </resources>
