@@ -14,7 +14,8 @@ class HomeModel(
     var bathRoomNumber: Int,
     var bedRoomNumber: Int,
     var location: String,
-    var uid: String
+    var uid: String,
+    var description:String
 ) {
     companion object {
         var testHome = HomeModel(
@@ -31,7 +32,8 @@ class HomeModel(
             1,
             2,
             "location",
-            "testhomeUid"
+            "testhomeUid",
+            "for test purpose"
         )
         var testHome2 = HomeModel(
             "avatar",
@@ -47,7 +49,8 @@ class HomeModel(
             1,
             2,
             "location",
-            "testHome2Uid"
+            "testHome2Uid",
+            "for test purpose"
         )
     }
 }

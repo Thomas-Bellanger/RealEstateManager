@@ -12,5 +12,12 @@
     <string name="can_t_show_the_map">Can\'t show the map</string>
     <!-- MapBoxToken -->
     <string name="access_token">pk.eyJ1IjoibmV4aXNsdWNpcyIsImEiOiJja3k0ZXFkNmwwN240MnZxYzlybm5tNmJwIn0.hWrbWExHjXPP2I0O7CXIGA</string>
+    <!-- Spinner -->
+    <string-array name="Type">Spinner HouseTypes
+        <item>House</item>
+        <item>PentHouse</item>
+        <item>Appartment</item>
+        <item>Duplex</item>
+    </string-array>
 
 </resources>

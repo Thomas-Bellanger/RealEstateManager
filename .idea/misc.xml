@@ -6,12 +6,17 @@
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-land/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-land/fragment_blank.xml" value="0.11022927689594356" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-land/fragment_fullscreen.xml" value="0.1421875" />
-        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-w600dp/activity_add.xml" value="0.21104536489151873" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-w600dp/activity_detail.xml" value="0.264" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout-w600dp/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add.xml" value="0.152" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_detail.xml" value="0.152" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_edit.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_map.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_second.xml" value="0.264" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_adress.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_surface.xml" value="0.264" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_blank.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_detail.xml" value="0.4" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_fullscreen.xml" value="0.25416666666666665" />
@@ -21,6 +26,7 @@
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/home_recycler_view.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/mainactivityrecyclerviewlist.xml" value="0.264" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/media_list_item.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/switch_layout.xml" value="0.12129629629629629" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/layout/toolbar.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/tombe/AndroidStudioProjects/RealEstateManager/RealEstateManager/app/src/main/res/menu/menu_toolbar.xml" value="0.25416666666666665" />
       </map>
@@ -79,7 +85,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.4" />
+        <option name="scale" value="0.264" />
       </ProjectState>
     </option>
   </component>

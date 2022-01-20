@@ -1,7 +1,7 @@
 package com.openclassrooms.realestatemanager.detailActivity
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.detailActivity.fragment.DetailFragment
@@ -29,16 +29,12 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun configureAndShowDetailFragment() {
-        // A - Get FragmentManager (Support) and Try to find existing instance of fragment in FrameLayout container
         detailFragment =
             supportFragmentManager.findFragmentById(R.id.frameLayoutDetail) as DetailFragment?
-        if (detailFragment == null) {
-            // B - Create new main fragment
             detailFragment = DetailFragment()
-            // C - Add it to FrameLayout container
             supportFragmentManager.beginTransaction()
                 .add(R.id.frameLayoutDetail, detailFragment!!)
                 .commit()
         }
+
     }
-}

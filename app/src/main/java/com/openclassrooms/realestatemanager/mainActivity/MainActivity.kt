@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         configureDrawerLayout()
         onDrawerOpened()
         configureNavigationView()
-
     }
 
     private fun configureToolbar() {
@@ -179,6 +178,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         viewModel!!.setMyHome(home)
         if (detailFragment == null && this.findViewById<FrameLayout>(R.id.frameLayoutDetail) == null) {
             val intent = Intent(this, DetailActivity::class.java)
+            Log.e("click","clicked!")
             startActivity(intent)
         }
     }

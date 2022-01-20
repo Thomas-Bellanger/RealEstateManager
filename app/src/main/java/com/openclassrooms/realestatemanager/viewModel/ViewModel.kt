@@ -2,11 +2,13 @@ package com.openclassrooms.realestatemanager.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.model.HomeModel
 
 class ViewModel {
 
     var home = MutableLiveData<HomeModel>()
+    var homeManager = HomeManager.getInstance()
 
     companion object {
 
@@ -36,5 +38,24 @@ class ViewModel {
     fun setMyHome(newHome: HomeModel) {
         home.value = newHome
         Log.e("viewmodel", home.value?.type.toString())
+    }
+
+    fun createHomeFireBase(avatar: String,
+                           type: String,
+                           city: String,
+                           price: Double,
+                           street: String,
+                           appartment: String?,
+                           postalCode: String,
+                           country: String,
+                           surface: Int,
+                           roomNumber: Int,
+                           bathRoomNumber: Int,
+                           bedRoomNumber: Int,
+                           location: String,
+                           uid: String,
+                           description:String){
+       var homeToCreate = HomeModel(avatar, type, city, price, street, appartment, postalCode, country, surface, roomNumber, bathRoomNumber, bedRoomNumber, location, uid, description)
+        homeManager.createHomeFirebase(homeToCreate)
     }
 }
