@@ -1,6 +1,9 @@
 package com.openclassrooms.realestatemanager.mainActivity.fragment
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
+import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import java.util.*
 import javax.security.auth.callback.Callback
 
@@ -19,6 +24,7 @@ class RecyclerViewFragment : Fragment(), Callback {
 
     private var recyclerView: RecyclerView? = null
     var homes: MutableList<HomeModel> = ArrayList()
+    private val viewModel: ViewModel? = ViewModel.getInstance()
 
     interface Callbacks {
         fun onClickResponse(home: HomeModel)
@@ -28,7 +34,7 @@ class RecyclerViewFragment : Fragment(), Callback {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.home_recycler_view, container, false)
         val context = view.context
         recyclerView = view as RecyclerView
@@ -43,6 +49,8 @@ class RecyclerViewFragment : Fragment(), Callback {
         homes.add(HomeModel.testHome2)
         initList(homes)
         configureOnClickRecyclerView()
+        viewModel!!.moneyType.observe(this.viewLifecycleOwner, this::changeMoney)
+
         return view
     }
 
@@ -60,9 +68,8 @@ class RecyclerViewFragment : Fragment(), Callback {
             }
     }
 
-    companion object {
-        fun newInstance(): RecyclerViewFragment {
-            return newInstance()
-        }
+    private fun changeMoney(money: ViewModel.MoneyType)
+    {
+        initList(homes)
     }
 }

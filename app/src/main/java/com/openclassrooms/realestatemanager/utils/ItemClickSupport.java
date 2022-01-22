@@ -1,14 +1,22 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.graphics.Color;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.model.PhotoModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
     private final int mItemID;
+
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

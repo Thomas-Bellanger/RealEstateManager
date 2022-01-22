@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.mainActivity.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,14 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.HomeModel
+import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.viewModel.ViewModel
 
 class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
     RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>() {
 
     private var mContext: Context? = null
+    private val viewModel: ViewModel? = ViewModel.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,12 +32,13 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
         holder.update(homes[position])
     }
 
-
     override fun getItemCount(): Int {
         return homes.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val viewModel: ViewModel? = ViewModel.getInstance()
         @BindView(R.id.homeImage)
         lateinit var homeImage: ImageView
 
@@ -52,8 +57,14 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
 
         fun update(home: HomeModel) {
             type.text = home.type
-            price.text = home.price.toString()
             city.text = home.city
+            if(viewModel!!.moneyType.value!! == ViewModel.MoneyType.DOLLAR) {
+                price.text = home.price.toString()
+            }
+            else if (viewModel!!.moneyType.value!! == ViewModel.MoneyType.EURO) {
+                price.text = Utils.convertDollarToEuro(home.price.toInt()).toString()
+            }
         }
     }
+
 }

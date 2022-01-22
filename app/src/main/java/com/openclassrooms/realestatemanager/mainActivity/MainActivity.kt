@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
                 }
             }
             if (viewModel != null) {
-                Log.e("click", "clicked  " + viewModel.moneyType.value)
             }
             return@setOnMenuItemClickListener true
         }

@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.model.HomeModel
+import com.openclassrooms.realestatemanager.model.PhotoModel
+import java.util.ArrayList
 
 class ViewModel {
 
     var home = MutableLiveData<HomeModel>()
     var homeManager = HomeManager.getInstance()
+    var listPhoto: MutableLiveData<MutableList<PhotoModel>> = MutableLiveData<MutableList<PhotoModel>>()
 
     companion object {
 
@@ -25,7 +28,7 @@ class ViewModel {
         }
     }
 
-    var moneyType: MutableLiveData<MoneyType?> = MutableLiveData<MoneyType?>()
+    var moneyType: MutableLiveData<MoneyType> = MutableLiveData<MoneyType>()
 
     enum class MoneyType {
         DOLLAR, EURO
