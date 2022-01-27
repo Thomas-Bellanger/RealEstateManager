@@ -13,6 +13,12 @@
     <!-- MapBoxToken -->
     <string name="access_token">pk.eyJ1IjoibmV4aXNsdWNpcyIsImEiOiJja3k0ZXFkNmwwN240MnZxYzlybm5tNmJwIn0.hWrbWExHjXPP2I0O7CXIGA</string>
     <string name="add_photos">Add Photos</string>
+    <string name="click_on_one_of_the_picture_below_to_choose">Click on one of the picture below to choose!</string>
+    <string name="main_picture">Main picture</string>
+    <string name="add_photo_to_list">Add photo to List</string>
+    <string name="name">Name</string>
+    <string name="add_a_photo">Add a photo</string>
+    <string name="add_house">Add House</string>
     <!-- Spinner -->
     <string-array name="Type">Spinner HouseTypes
         <item>House</item>

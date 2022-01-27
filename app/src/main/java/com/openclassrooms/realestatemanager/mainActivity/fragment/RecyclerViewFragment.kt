@@ -1,9 +1,6 @@
 package com.openclassrooms.realestatemanager.mainActivity.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
-import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import java.util.*
 import javax.security.auth.callback.Callback
@@ -62,14 +58,13 @@ class RecyclerViewFragment : Fragment(), Callback {
     // 1 - Configure item click on RecyclerView
     private fun configureOnClickRecyclerView() {
         var callback: Callbacks = activity as Callbacks
-        ItemClickSupport.addTo(recyclerView!!,R.layout.home_list_item)
+        ItemClickSupport.addTo(recyclerView!!, R.layout.home_list_item)
             .setOnItemClickListener { _, position, _ ->
                 callback.onClickResponse(homes[position])
             }
     }
 
-    private fun changeMoney(money: ViewModel.MoneyType)
-    {
+    private fun changeMoney(money: ViewModel.MoneyType) {
         initList(homes)
     }
 }

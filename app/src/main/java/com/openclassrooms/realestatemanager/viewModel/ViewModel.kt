@@ -16,10 +16,13 @@ class ViewModel {
 
     var home = MutableLiveData<HomeModel>()
     var homeManager = HomeManager.getInstance()
-    var listPhoto: MutableLiveData<MutableList<PhotoModel>> = MutableLiveData<MutableList<PhotoModel>>()
-    var listHomes: MutableLiveData<MutableList<HomeModel>> = MutableLiveData<MutableList<HomeModel>>()
+    var listPhoto: MutableLiveData<MutableList<PhotoModel>> =
+        MutableLiveData<MutableList<PhotoModel>>()
+    var listHomes: MutableLiveData<MutableList<HomeModel>> =
+        MutableLiveData<MutableList<HomeModel>>()
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
+    var isAppartment: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     companion object {
         @Volatile
@@ -31,8 +34,8 @@ class ViewModel {
         }
     }
 
-    fun getRestaurantsFromFireBase(){
-    homeManager.homeCollection.get().addOnSuccessListener {  }
+    fun getRestaurantsFromFireBase() {
+        homeManager.homeCollection.get().addOnSuccessListener { }
     }
 
     var moneyType: MutableLiveData<MoneyType> = MutableLiveData<MoneyType>()
@@ -49,22 +52,42 @@ class ViewModel {
         home.value = newHome
     }
 
-    fun createHomeFireBase(avatar: String,
-                           type: String,
-                           city: String,
-                           price: Double,
-                           street: String,
-                           appartment: String?,
-                           postalCode: String,
-                           country: String,
-                           surface: Int,
-                           roomNumber: Int,
-                           bathRoomNumber: Int,
-                           bedRoomNumber: Int,
-                           location: String,
-                           uid: String,
-                           description:String){
-       val homeToCreate = HomeModel(avatar, type, city, price, street, appartment, postalCode, country, surface, roomNumber, bathRoomNumber, bedRoomNumber, location, uid, description)
+    fun createHomeFireBase(
+        avatar: String,
+        type: String,
+        city: String,
+        price: Double,
+        street: String,
+        appartment: String?,
+        postalCode: String,
+        country: String,
+        surface: Int,
+        roomNumber: Int,
+        bathRoomNumber: Int,
+        bedRoomNumber: Int,
+        location: String,
+        uid: String,
+        description: String,
+        listPhoto: MutableList<PhotoModel>
+    ) {
+        val homeToCreate = HomeModel(
+            avatar,
+            type,
+            city,
+            price,
+            street,
+            appartment,
+            postalCode,
+            country,
+            surface,
+            roomNumber,
+            bathRoomNumber,
+            bedRoomNumber,
+            location,
+            uid,
+            description,
+            listPhoto
+        )
         homeManager.createHomeFirebase(homeToCreate)
     }
 
@@ -93,5 +116,9 @@ class ViewModel {
 
         // Show notification
         notificationManagers.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notificationBuilder.build())
+    }
+
+    fun compareString(type: String) {
+        isAppartment.value = type == "Appartment"
     }
 }

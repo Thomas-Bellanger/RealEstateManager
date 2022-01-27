@@ -64,6 +64,13 @@
         android:layout_gravity="center"/>
 
     <EditText
+        android:id="@+id/addAppartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Appartment number"
+        android:layout_gravity="center"/>
+
+    <EditText
         android:id="@+id/addCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

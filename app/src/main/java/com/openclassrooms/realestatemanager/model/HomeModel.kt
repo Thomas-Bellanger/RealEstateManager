@@ -15,8 +15,8 @@ class HomeModel(
     var bedRoomNumber: Int,
     var location: String,
     var uid: String,
-    var description:String,
-    var listPhoto: MutableList<PhotoModel> = mutableListOf()
+    var description: String,
+    var listPhoto: MutableList<PhotoModel>
 ) {
     companion object {
         var testHome = HomeModel(

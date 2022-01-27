@@ -6,6 +6,11 @@
         android:icon="@drawable/baseline_attach_money_green_a700_24dp"
         android:title="@string/convert"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/addMenu"
+        android:icon="@drawable/baseline_home_black_24dp"
+        android:title="@string/add_house"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/edit"
