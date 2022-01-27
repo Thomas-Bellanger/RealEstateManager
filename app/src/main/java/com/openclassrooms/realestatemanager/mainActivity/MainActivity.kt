@@ -1,6 +1,11 @@
 package com.openclassrooms.realestatemanager.mainActivity
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Intent
+import android.media.RingtoneManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -8,9 +13,11 @@ import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.messaging.RemoteMessage
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.addActivity.AddActivity
 import com.openclassrooms.realestatemanager.detailActivity.DetailActivity
@@ -177,7 +184,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         viewModel!!.setMyHome(home)
         if (detailFragment == null && this.findViewById<FrameLayout>(R.id.frameLayoutDetail) == null) {
             val intent = Intent(this, DetailActivity::class.java)
-            Log.e("click","clicked!")
             startActivity(intent)
         }
     }

@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".addActivity.AddActivity"
     android:orientation="vertical">
+
     <include
     android:id="@+id/toolbar"
     layout="@layout/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,133 +26,164 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Type:"/>
+        android:text="Type:"
+        android:layout_gravity="center"/>
     <Spinner
         android:id="@+id/addType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Adress:"/>
+        android:text="Adress:"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="City"/>
+        android:hint="City"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addStreet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Street"/>
+        android:hint="Street"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addPostal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Postal Code"/>
+        android:hint="Postal Code"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="country"/>
+        android:hint="country"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Surface:"/>
+        android:text="Surface:"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addSurface"
         android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Surface"/>
+        android:hint="Surface"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Room Number:"/>
+        android:text="Room Number:"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Room Number"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Bedroom Number:"/>
+        android:text="Bedroom Number:"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addBedRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Bedroom Number"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Bathroom Number:"/>
+        android:text="Bathroom Number:"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addBathRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Bathroom Number"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Price:"/>
+        android:text="Price:"
+        android:layout_gravity="center"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/addPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Price"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:layout_gravity="center"/>
         <Spinner
             android:layout_marginLeft="5dp"
             android:id="@+id/addMoneyType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Description"/>
+        android:text="Description"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/addDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Description"/>
+        android:hint="Description"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/addPhotoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_photos"/>
+        android:text="@string/add_photos"
+        android:layout_gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPhotoAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/media_list_item"
+        />
 
     <Button
         android:id="@+id/createButton"
@@ -157,7 +191,6 @@
         android:layout_height="wrap_content"
         android:text="Create"
         android:backgroundTint="@color/light_blue_600"/>
-
 </LinearLayout>
     </ScrollView>
 </LinearLayout>

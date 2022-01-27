@@ -15,7 +15,8 @@ class HomeModel(
     var bedRoomNumber: Int,
     var location: String,
     var uid: String,
-    var description:String
+    var description:String,
+    var listPhoto: MutableList<PhotoModel> = mutableListOf()
 ) {
     companion object {
         var testHome = HomeModel(
@@ -33,7 +34,8 @@ class HomeModel(
             2,
             "location",
             "testhomeUid",
-            "for test purpose"
+            "for test purpose",
+            mutableListOf()
         )
         var testHome2 = HomeModel(
             "avatar",
@@ -50,7 +52,8 @@ class HomeModel(
             2,
             "location",
             "testHome2Uid",
-            "for test purpose"
+            "for test purpose",
+            mutableListOf()
         )
     }
 }
