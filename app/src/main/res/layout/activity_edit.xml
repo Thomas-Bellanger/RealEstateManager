@@ -12,8 +12,55 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editCOnstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7C7C7C"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click on confirm to validate the sell (the property will disappear from the application)"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            android:background="@color/white"
+            android:gravity="center"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/editCancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#FD2323"
+                    android:text="@string/cancel"
+                    />
+
+                <Button
+                    android:id="@+id/editConfirmBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#009688"
+                    android:text="@string/confirm" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/editScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

@@ -65,5 +65,4 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
             }
         }
     }
-
 }

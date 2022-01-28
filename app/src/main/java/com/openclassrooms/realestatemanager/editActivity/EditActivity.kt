@@ -4,7 +4,7 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.addActivity.PhotoActivity.PhotoActivity
-import com.openclassrooms.realestatemanager.addActivity.adapter.AddActivityRecyclerVIewAdapter
+import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
 import com.openclassrooms.realestatemanager.databinding.ActivityEditBinding
 import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.utils.Utils
@@ -63,6 +63,7 @@ class EditActivity : AppCompatActivity() {
         viewModel?.listPhoto?.observe(this, this::initList)
         viewModel?.isAppartment?.observe(this, this::configureAppartmentVisibility)
         configureInfo()
+        binding.sellButton.setOnClickListener { confirmSell() }
     }
 
     private fun configureToolbar() {
@@ -160,7 +161,7 @@ class EditActivity : AppCompatActivity() {
     //update the list
     private fun initList(listPhoto: MutableList<PhotoModel>) {
         var recyclerView = binding.recyclerViewPhotoAdd
-        recyclerView.adapter = AddActivityRecyclerVIewAdapter(listPhoto)
+        recyclerView.adapter = PhotoRecyclerVIewAdapter(listPhoto)
     }
 
     private fun configureClick() {
@@ -255,7 +256,24 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    fun createNotif() {
+    private fun confirmSell(){
+        binding.editScroll.visibility = INVISIBLE
+        binding.editCOnstraint.visibility = VISIBLE
+        binding.editConfirmBtn.setOnClickListener { sellHome() }
+        binding.editCancelBtn.setOnClickListener { cancel() }
+    }
+
+    private fun sellHome(){
+        createNotif()
+        viewModel?.deletteHome(viewModel?.home?.value!!)
+        finish()
+    }
+
+    private fun cancel(){
+        binding.editScroll.visibility = VISIBLE
+        binding.editCOnstraint.visibility = GONE
+    }
+    private fun createNotif() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val context = baseContext
         viewModel?.sendVisualNotification(context, notificationManager)

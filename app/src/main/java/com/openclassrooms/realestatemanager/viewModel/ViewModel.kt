@@ -5,12 +5,18 @@ import android.app.NotificationManager
 import android.content.Context
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
+import com.openclassrooms.realestatemanager.model.User
+import kotlin.math.log
 
 class ViewModel {
 
@@ -20,6 +26,7 @@ class ViewModel {
         MutableLiveData<MutableList<PhotoModel>>()
     var listHomes: MutableLiveData<MutableList<HomeModel>> =
         MutableLiveData<MutableList<HomeModel>>()
+    var avatar:String = ""
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
     var isAppartment: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -32,10 +39,6 @@ class ViewModel {
             instance = instance?.let { result } ?: ViewModel()
             return instance
         }
-    }
-
-    fun getRestaurantsFromFireBase() {
-        homeManager.homeCollection.get().addOnSuccessListener { }
     }
 
     var moneyType: MutableLiveData<MoneyType> = MutableLiveData<MoneyType>()
@@ -121,4 +124,14 @@ class ViewModel {
     fun compareString(type: String) {
         isAppartment.value = type == "Appartment"
     }
-}
+
+    fun deletteHome(homeModel: HomeModel){
+        homeManager.deletteHomeFirebase(homeModel)
+    }
+
+    fun getHomesFromFireStore(){
+        listHomes.value= mutableListOf()
+        homeManager.homeCollection.get().addOnSuccessListener {
+        }
+        }
+    }

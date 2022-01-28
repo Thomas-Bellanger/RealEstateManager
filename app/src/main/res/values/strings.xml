@@ -19,6 +19,10 @@
     <string name="name">Name</string>
     <string name="add_a_photo">Add a photo</string>
     <string name="add_house">Add House</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_the_home_has_been_sold">Confirm the home has been sold?</string>
+    <string name="price">Price</string>
     <!-- Spinner -->
     <string-array name="Type">Spinner HouseTypes
         <item>House</item>
