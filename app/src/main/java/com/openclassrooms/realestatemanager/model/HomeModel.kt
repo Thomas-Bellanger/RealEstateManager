@@ -1,6 +1,11 @@
 package com.openclassrooms.realestatemanager.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+@Entity
 class HomeModel(
+    @PrimaryKey
+    var uid: String,
     var avatar: String,
     var type: String,
     var city: String,
@@ -14,12 +19,12 @@ class HomeModel(
     var bathRoomNumber: Int,
     var bedRoomNumber: Int,
     var location: String,
-    var uid: String,
+
     var description: String,
     var listPhoto: MutableList<PhotoModel>
 ) {
     companion object {
-        var testHome = HomeModel(
+        var testHome = HomeModel(uid = "testHomeUID",
             "avatar",
             "Penthouse",
             "L.A",
@@ -33,11 +38,10 @@ class HomeModel(
             1,
             2,
             "location",
-            "testhomeUid",
             "for test purpose",
             mutableListOf()
         )
-        var testHome2 = HomeModel(
+        var testHome2 = HomeModel("testHome2UID",
             "avatar",
             "House",
             "N.Y",
@@ -51,7 +55,6 @@ class HomeModel(
             1,
             2,
             "location",
-            "testHome2Uid",
             "for test purpose",
             mutableListOf()
         )
