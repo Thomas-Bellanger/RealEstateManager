@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".addActivity.AddActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".addActivity.AddActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/editCOnstraint"
         android:layout_width="match_parent"
@@ -22,10 +23,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Click on confirm to validate the sell (the property will disappear from the application)"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
             android:background="@color/white"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Click on confirm to validate the sell (the property will disappear from the application)"
+            app:layout_constraintBottom_toTopOf="@+id/cardView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -45,8 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:backgroundTint="#FD2323"
-                    android:text="@string/cancel"
-                    />
+                    android:text="@string/cancel" />
 
                 <Button
                     android:id="@+id/editConfirmBtn"
@@ -62,8 +62,8 @@
     <ScrollView
         android:id="@+id/editScroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -72,163 +72,168 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Type:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/addType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Adress:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="City"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="City" />
 
             <EditText
                 android:id="@+id/addStreet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Street"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="Street" />
 
             <EditText
                 android:id="@+id/addPostal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Postal Code"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="Postal Code" />
 
             <EditText
                 android:id="@+id/addAppartment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Appartment number"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="Appartment number" />
 
             <EditText
                 android:id="@+id/addCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="country"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="country" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Surface:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addSurface"
-                android:inputType="number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="Surface"
-                android:layout_gravity="center"/>
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Room Number:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="Room Number"
-                android:inputType="number"
-                android:layout_gravity="center"/>
+                android:inputType="number" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Bedroom Number:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addBedRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="Bedroom Number"
-                android:inputType="number"
-                android:layout_gravity="center"/>
+                android:inputType="number" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Bathroom Number:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addBathRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="Bathroom Number"
-                android:inputType="number"
-                android:layout_gravity="center"/>
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Price:"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/addPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:hint="Price"
-                    android:inputType="number"
-                    android:layout_gravity="center"/>
+                    android:inputType="number" />
+
                 <Spinner
-                    android:layout_marginLeft="5dp"
                     android:id="@+id/addMoneyType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:text="Description"
-                android:layout_gravity="center"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/addDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Description"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:hint="Description" />
 
             <Button
                 android:id="@+id/addPhotoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_photos"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:text="@string/add_photos" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewPhotoAdd"
@@ -236,27 +241,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/media_list_item"
-                />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-            <Button
-                android:id="@+id/editButton"
+                tools:listitem="@layout/media_list_item" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:text="Apply change"
-                android:backgroundTint="#FF9800"/>
-    <Button
-        android:id="@+id/sellButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="50"
-        android:text="Sold?"
-        android:backgroundTint="#4CAF50"/>
-</LinearLayout>
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#FF9800"
+                    android:text="Apply change" />
+
+                <Button
+                    android:id="@+id/sellButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#4CAF50"
+                    android:text="Sold?" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

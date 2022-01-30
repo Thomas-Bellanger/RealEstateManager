@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.addActivity.PhotoActivity.PhotoActivity
 import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
+import com.openclassrooms.realestatemanager.addActivity.PhotoActivity.PhotoActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityEditBinding
 import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.utils.Utils
@@ -66,6 +66,7 @@ class EditActivity : AppCompatActivity() {
         binding.sellButton.setOnClickListener { confirmSell() }
     }
 
+    //toolbar
     private fun configureToolbar() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -73,6 +74,7 @@ class EditActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
+    //set the spinner to choose property type
     private fun configureSpinner() {
         var type = binding.addType
         val adapterTypes = ArrayAdapter.createFromResource(
@@ -99,6 +101,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    //show appartment number if the property is an appartment
     private fun configureAppartmentVisibility(boolean: Boolean) {
         if (boolean) {
             binding.addAppartment.visibility = View.VISIBLE
@@ -108,6 +111,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    //set spinner for money type
     private fun configureMoneySpinner() {
         var moneyType = binding.addMoneyType
         val adapterTypes = ArrayAdapter.createFromResource(
@@ -133,6 +137,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    //set the views with home's information
     private fun configureInfo() {
         val homeModel = viewModel?.home?.value
         if (binding.addAppartment.visibility == VISIBLE) {
@@ -150,6 +155,7 @@ class EditActivity : AppCompatActivity() {
         homeModel?.description?.let { binding.addDescription.setText(it) }
     }
 
+    //intent to search photos
     private fun photoIntent() {
         var photoIntent: Intent? = Intent(this, PhotoActivity::class.java)
         startActivity(photoIntent)
@@ -161,6 +167,7 @@ class EditActivity : AppCompatActivity() {
         recyclerView.adapter = PhotoRecyclerVIewAdapter(listPhoto)
     }
 
+    //check info and edit the property
     private fun configureClick() {
         callBackCity = binding.addCity.text.toString()
         callBackCountry = binding.addCountry.text.toString()
@@ -252,23 +259,29 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    private fun confirmSell(){
+    //settings to confirm the sell
+    private fun confirmSell() {
         binding.editScroll.visibility = INVISIBLE
         binding.editCOnstraint.visibility = VISIBLE
         binding.editConfirmBtn.setOnClickListener { sellHome() }
         binding.editCancelBtn.setOnClickListener { cancel() }
     }
 
-    private fun sellHome(){
+    //confirm home's selling
+    private fun sellHome() {
+        viewModel?.home?.value?.isSolde = true
+        viewModel?.home?.value?.sellTime = Utils.getTodayDate()
         createNotif()
-        viewModel?.deletteHome(viewModel?.home?.value!!)
         finish()
     }
 
-    private fun cancel(){
+    //cancel selling
+    private fun cancel() {
         binding.editScroll.visibility = VISIBLE
         binding.editCOnstraint.visibility = GONE
     }
+
+    //create notification
     private fun createNotif() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val context = baseContext

@@ -11,6 +11,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
+import com.openclassrooms.realestatemanager.utils.Utils
 
 class ViewModel {
 
@@ -20,7 +21,7 @@ class ViewModel {
         MutableLiveData<MutableList<PhotoModel>>()
     var listHomes: MutableLiveData<MutableList<HomeModel>> =
         MutableLiveData<MutableList<HomeModel>>()
-    var avatar:String = ""
+    var avatar: String = ""
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
     var isAppartment: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -66,7 +67,9 @@ class ViewModel {
         uid: String,
         description: String
     ) {
-        val homeToCreate = HomeModel(0,
+        var creationTime = Utils.getTodayDate()
+        val homeToCreate = HomeModel(
+            0,
             avatar,
             type,
             city,
@@ -80,7 +83,10 @@ class ViewModel {
             bathRoomNumber,
             bedRoomNumber,
             location,
-            description
+            description,
+            creationTime,
+            false,
+            ""
         )
         homeManager.createHomeFirebase(homeToCreate)
     }
@@ -116,13 +122,13 @@ class ViewModel {
         isAppartment.value = type == "Appartment"
     }
 
-    fun deletteHome(homeModel: HomeModel){
+    fun deletteHome(homeModel: HomeModel) {
         homeManager.deletteHomeFirebase(homeModel)
     }
 
-    fun getHomesFromFireStore(){
-        listHomes.value= mutableListOf()
+    fun getHomesFromFireStore() {
+        listHomes.value = mutableListOf()
         homeManager.homeCollection.get().addOnSuccessListener {
         }
-        }
     }
+}

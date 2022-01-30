@@ -9,7 +9,7 @@
         android:id="@+id/mediaListItemImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@color/white"/>
+        android:src="@color/white" />
 
     <TextView
         android:id="@+id/mediaListItemText"
@@ -18,14 +18,15 @@
         android:background="#595858"
         android:gravity="center"
         android:text="name"
-        android:textColor="#FFFFFF"/>
-<ImageButton
-    android:id="@+id/mediaListItemDelette"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/delete"
-    android:backgroundTint="#A8A8A8"
-    android:hint="delette"
-    android:visibility="gone"/>
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/mediaListItemDelette"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#A8A8A8"
+        android:hint="delette"
+        android:src="@drawable/delete"
+        android:visibility="gone" />
 
 </LinearLayout>

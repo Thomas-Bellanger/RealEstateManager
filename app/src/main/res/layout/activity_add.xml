@@ -1,203 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".addActivity.AddActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".addActivity.AddActivity">
 
     <include
-    android:id="@+id/toolbar"
-    layout="@layout/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Type:"
-        android:layout_gravity="center"/>
-    <Spinner
-        android:id="@+id/addType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Adress:"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Type:"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/addCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="City"
-        android:layout_gravity="center"/>
+            <Spinner
+                android:id="@+id/addType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp" />
 
-    <EditText
-        android:id="@+id/addStreet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Street"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Adress:"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/addPostal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Postal Code"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="City" />
 
-    <EditText
-        android:id="@+id/addAppartment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Appartment number"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addStreet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Street" />
 
-    <EditText
-        android:id="@+id/addCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="country"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Surface:"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addPostal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Postal Code" />
 
-    <EditText
-        android:id="@+id/addSurface"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Surface"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addAppartment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Appartment number" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Room Number:"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="country" />
 
-    <EditText
-        android:id="@+id/addRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Room Number"
-        android:inputType="number"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Bedroom Number:"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Surface:"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/addBedRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Bedroom Number"
-        android:inputType="number"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Bathroom Number:"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addSurface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Surface"
+                android:inputType="number" />
 
-    <EditText
-        android:id="@+id/addBathRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Bathroom Number"
-        android:inputType="number"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Room Number:"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Price:"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Room Number"
+                android:inputType="number" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Bedroom Number:"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/addPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="number"
-            android:layout_gravity="center"/>
-        <Spinner
-            android:layout_marginLeft="5dp"
-            android:id="@+id/addMoneyType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/addBedRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Bedroom Number"
+                android:inputType="number" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Description"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Bathroom Number:"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/addDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/addBathRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Bathroom Number"
+                android:inputType="number" />
 
-    <Button
-        android:id="@+id/addPhotoBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_photos"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Price:"
+                android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPhotoAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/media_list_item"
-        />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/createButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create"
-        android:backgroundTint="@color/light_blue_600"/>
-</LinearLayout>
+                <EditText
+                    android:id="@+id/addPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Price"
+                    android:inputType="number" />
+
+                <Spinner
+                    android:id="@+id/addMoneyType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Description"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/addDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Description" />
+
+            <Button
+                android:id="@+id/addPhotoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/add_photos" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewPhotoAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/media_list_item" />
+
+            <Button
+                android:id="@+id/createButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_blue_600"
+                android:text="Create" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

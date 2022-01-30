@@ -22,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
         configureAndShowDetailFragment()
     }
 
+    //toolbar
     private fun configureToolbar() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -29,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
+    //detail fragment
     private fun configureAndShowDetailFragment() {
         detailFragment =
             supportFragmentManager.findFragmentById(R.id.frameLayoutDetail) as DetailFragment?
@@ -38,6 +40,7 @@ class DetailActivity : AppCompatActivity() {
             .commit()
     }
 
+    //menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_toolbar_detail, menu)
@@ -47,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
             editIntent()
             return@setOnMenuItemClickListener true
         }
-
+        //conversion money
         var conversion: MenuItem? = menu?.findItem(R.id.convert)
         conversion!!.setOnMenuItemClickListener {
             if (viewModel != null) {
@@ -66,6 +69,7 @@ class DetailActivity : AppCompatActivity() {
         return true
     }
 
+    //edit activity intent
     private fun editIntent() {
         var editIntent: Intent? = Intent(this, EditActivity::class.java)
         startActivity(editIntent)

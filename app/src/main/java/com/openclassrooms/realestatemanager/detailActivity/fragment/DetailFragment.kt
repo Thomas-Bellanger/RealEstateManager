@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
@@ -31,9 +31,11 @@ class DetailFragment : Fragment() {
     lateinit var postalCode: TextView
     lateinit var country: TextView
     lateinit var description: TextView
-    lateinit var price:TextView
-    lateinit var symbol:ImageView
-    lateinit var recyclerView:RecyclerView
+    lateinit var price: TextView
+    lateinit var symbol: ImageView
+    lateinit var createTime: TextView
+    lateinit var sellTime: TextView
+    lateinit var recyclerView: RecyclerView
     var listPhoto: MutableList<PhotoModel> = mutableListOf()
 
     override fun onCreateView(
@@ -57,6 +59,8 @@ class DetailFragment : Fragment() {
         symbol = view.findViewById(R.id.detailMoneySymbol)
         recyclerView = view.findViewById(R.id.recyclerViewRooms)
         listPhoto.add(PhotoModel.NO_PHOTO)
+        createTime = view.findViewById(R.id.creationTime)
+        sellTime = view.findViewById(R.id.sellTime)
         if (viewModel!!.getMyHome().value != null) {
             home = viewModel.getMyHome().value!!
             adjustValue(home)
@@ -67,6 +71,7 @@ class DetailFragment : Fragment() {
         return view
     }
 
+    //adjust value with home
     private fun adjustValue(home: HomeModel) {
         description.text = home.description
         surface.text = home.surface.toString()
@@ -75,24 +80,40 @@ class DetailFragment : Fragment() {
         bedRooms.text = home.bedRoomNumber.toString()
         adressNumber.text = home.street
         home.appartment.let {
-            appartment.text = it ?:""
+            appartment.text = it ?: ""
         }
-        if(appartment.text.isNullOrEmpty()){
-            appartment.visibility= GONE
+        if (appartment.text.isNullOrEmpty()) {
+            appartment.visibility = GONE
         }
         city.text = home.city
         postalCode.text = home.postalCode
         country.text = home.country
         description.text = home.description
+        sellTime.text = home.creationTime
+        if (home.isSolde) {
+            sellTime.visibility = VISIBLE
+            sellTime.text = home.sellTime
+        }
     }
 
-    private fun changeMoney(money: ViewModel.MoneyType){
+    //change price with money type
+    private fun changeMoney(money: ViewModel.MoneyType) {
         if (viewModel!!.moneyType.value!! == ViewModel.MoneyType.DOLLAR) {
-            symbol.setImageDrawable(getDrawable(requireContext(),R.drawable.baseline_attach_money_green_a700_24dp))
+            symbol.setImageDrawable(
+                getDrawable(
+                    requireContext(),
+                    R.drawable.baseline_attach_money_green_a700_24dp
+                )
+            )
             price.text = home.price.toString()
         } else if (viewModel.moneyType.value!! == ViewModel.MoneyType.EURO) {
-            price.text = Utils.convertDollarToEuro(home.price!!.toInt()).toString()
-            symbol.setImageDrawable(getDrawable(requireContext(),R.drawable.baseline_euro_symbol_yellow_700_24dp))
+            price.text = Utils.convertDollarToEuro(home.price.toInt()).toString()
+            symbol.setImageDrawable(
+                getDrawable(
+                    requireContext(),
+                    R.drawable.baseline_euro_symbol_yellow_700_24dp
+                )
+            )
         }
     }
 }

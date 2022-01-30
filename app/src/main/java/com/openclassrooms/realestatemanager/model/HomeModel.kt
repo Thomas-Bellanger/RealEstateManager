@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 @Entity
 class HomeModel(
     @PrimaryKey
@@ -19,7 +20,10 @@ class HomeModel(
     var bathRoomNumber: Int,
     var bedRoomNumber: Int,
     var location: String,
-    var description: String
+    var description: String,
+    var creationTime: String,
+    var isSolde: Boolean,
+    var sellTime: String
 ) {
     companion object {
         var testHome = HomeModel(
@@ -37,7 +41,10 @@ class HomeModel(
             1,
             2,
             "location",
-            "for test purpose"
+            "for test purpose",
+            "30/01/22",
+            false,
+            ""
         )
         var testHome2 = HomeModel(
             1L,
@@ -54,7 +61,10 @@ class HomeModel(
             1,
             2,
             "location",
-            "for test purpose"
+            "for test purpose",
+            "30/01/22",
+            true,
+            "30/01/22"
         )
     }
 }

@@ -58,10 +58,14 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
         fun update(home: HomeModel) {
             type.text = home.type
             city.text = home.city
-            if (viewModel!!.moneyType.value!! == ViewModel.MoneyType.DOLLAR) {
-                price.text = home.price.toString()
-            } else if (viewModel.moneyType.value!! == ViewModel.MoneyType.EURO) {
-                price.text = Utils.convertDollarToEuro(home.price.toInt()).toString()
+            if (home.isSolde) {
+                price.text = "Sold!"
+            } else {
+                if (viewModel!!.moneyType.value!! == ViewModel.MoneyType.DOLLAR) {
+                    price.text = home.price.toString()
+                } else if (viewModel.moneyType.value!! == ViewModel.MoneyType.EURO) {
+                    price.text = Utils.convertDollarToEuro(home.price.toInt()).toString()
+                }
             }
         }
     }
