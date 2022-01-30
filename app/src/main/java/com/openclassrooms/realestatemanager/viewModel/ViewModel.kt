@@ -64,10 +64,9 @@ class ViewModel {
         bedRoomNumber: Int,
         location: String,
         uid: String,
-        description: String,
-        listPhoto: MutableList<PhotoModel>
+        description: String
     ) {
-        val homeToCreate = HomeModel(
+        val homeToCreate = HomeModel(0,
             avatar,
             type,
             city,
@@ -81,9 +80,7 @@ class ViewModel {
             bathRoomNumber,
             bedRoomNumber,
             location,
-            uid,
-            description,
-            listPhoto
+            description
         )
         homeManager.createHomeFirebase(homeToCreate)
     }

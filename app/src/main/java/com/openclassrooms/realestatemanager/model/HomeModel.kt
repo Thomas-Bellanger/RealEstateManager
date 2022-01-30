@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 @Entity
 class HomeModel(
     @PrimaryKey
-    var uid: String,
+    var uid: Long,
     var avatar: String,
     var type: String,
     var city: String,
@@ -19,12 +19,11 @@ class HomeModel(
     var bathRoomNumber: Int,
     var bedRoomNumber: Int,
     var location: String,
-
-    var description: String,
-    var listPhoto: MutableList<PhotoModel>
+    var description: String
 ) {
     companion object {
-        var testHome = HomeModel(uid = "testHomeUID",
+        var testHome = HomeModel(
+            0L,
             "avatar",
             "Penthouse",
             "L.A",
@@ -38,10 +37,10 @@ class HomeModel(
             1,
             2,
             "location",
-            "for test purpose",
-            mutableListOf()
+            "for test purpose"
         )
-        var testHome2 = HomeModel("testHome2UID",
+        var testHome2 = HomeModel(
+            1L,
             "avatar",
             "House",
             "N.Y",
@@ -55,8 +54,7 @@ class HomeModel(
             1,
             2,
             "location",
-            "for test purpose",
-            mutableListOf()
+            "for test purpose"
         )
     }
 }

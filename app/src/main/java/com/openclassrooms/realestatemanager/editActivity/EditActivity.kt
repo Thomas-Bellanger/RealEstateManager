@@ -148,9 +148,6 @@ class EditActivity : AppCompatActivity() {
         homeModel?.postalCode?.let { binding.addPostal.setText(it) }
         homeModel?.price?.let { binding.addPrice.setText(it.toString()) }
         homeModel?.description?.let { binding.addDescription.setText(it) }
-        homeModel?.listPhoto.let {
-            editListPhoto = it ?: mutableListOf()
-        }
     }
 
     private fun photoIntent() {
@@ -233,7 +230,7 @@ class EditActivity : AppCompatActivity() {
                 }
                 editListPhoto = viewModel?.listPhoto?.value ?: editListPhoto
                 viewModel!!.createHomeFireBase(
-                    "avatar",
+                    viewModel!!.avatar,
                     callBackType,
                     callBackCity,
                     callBackPrice.toDouble(),
@@ -246,9 +243,8 @@ class EditActivity : AppCompatActivity() {
                     callBackBathRoom.toInt(),
                     callBackBedRoom.toInt(),
                     "location",
-                    callBackCity + "UID",
-                    callBackDescription,
-                    viewModel?.listPhoto?.value!!
+                    "",
+                    callBackDescription
                 )
                 createNotif()
                 this.finish()

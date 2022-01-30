@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        homeManager!!.createHomeFirebase(HomeModel.testHome)
-        homeManager?.createHomeFirebase(HomeModel.testHome2)
         viewModel?.moneyType?.value = ViewModel.MoneyType.DOLLAR
         configureAndShowMainFragment()
         configureAndShowDetailFragment()

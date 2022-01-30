@@ -9,10 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
 import com.openclassrooms.realestatemanager.model.HomeModel
+import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.viewModel.ViewModel
 
@@ -32,6 +34,7 @@ class DetailFragment : Fragment() {
     lateinit var price:TextView
     lateinit var symbol:ImageView
     lateinit var recyclerView:RecyclerView
+    var listPhoto: MutableList<PhotoModel> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,13 +56,14 @@ class DetailFragment : Fragment() {
         price = view.findViewById(R.id.detailPrice)
         symbol = view.findViewById(R.id.detailMoneySymbol)
         recyclerView = view.findViewById(R.id.recyclerViewRooms)
+        listPhoto.add(PhotoModel.NO_PHOTO)
         if (viewModel!!.getMyHome().value != null) {
             home = viewModel.getMyHome().value!!
             adjustValue(home)
         }
         viewModel.getMyHome().observe(this.viewLifecycleOwner, this::adjustValue)
         viewModel.moneyType.observe(this.viewLifecycleOwner, this::changeMoney)
-        recyclerView.adapter = PhotoRecyclerVIewAdapter(home.listPhoto)
+        recyclerView.adapter = PhotoRecyclerVIewAdapter(listPhoto)
         return view
     }
 
