@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         configureDrawerLayout()
         onDrawerOpened()
         configureNavigationView()
+        viewModel?.getHomesFromFireStore()
+
     }
 
     private fun configureToolbar() {

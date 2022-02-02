@@ -4,30 +4,47 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class HomeModel(
+class HomeModel{
     @PrimaryKey
-    var uid: Long,
-    var avatar: String,
-    var type: String,
-    var city: String,
-    var price: Double,
-    var street: String,
-    var appartment: String?,
-    var postalCode: String,
-    var country: String,
-    var surface: Int,
-    var roomNumber: Int,
-    var bathRoomNumber: Int,
-    var bedRoomNumber: Int,
-    var location: String,
-    var description: String,
-    var creationTime: String,
-    var isSolde: Boolean,
-    var sellTime: String
-) {
+    var uid: Long=0
+    lateinit var avatar: String
+    lateinit var type: String
+    lateinit var city: String
+    var price: Double=0.0
+    lateinit var street: String
+    var appartment: String? = null
+    lateinit var postalCode: String
+    lateinit var country: String
+    var surface: Int = 0
+    var roomNumber: Int = 0
+    var bathRoomNumber: Int = 0
+    var bedRoomNumber: Int = 0
+    lateinit var location: String
+    lateinit var description: String
+    lateinit var creationTime: String
+    var isSolde: Boolean=false
+    lateinit var sellTime: String
+
+    constructor(avatar: String,
+                type: String,
+                city: String,
+                price: Double,
+                street: String,
+                appartment: String?,
+                postalCode: String,
+                country: String,
+                surface: Int,
+                roomNumber: Int,
+                bathRoomNumber: Int,
+                bedRoomNumber: Int,
+                location: String,
+                description: String,
+                creationTime: String,
+                isSolde: Boolean,
+                sellTime: String)
+    constructor(){}
     companion object {
         var testHome = HomeModel(
-            0L,
             "avatar",
             "Penthouse",
             "L.A",
@@ -47,7 +64,6 @@ class HomeModel(
             ""
         )
         var testHome2 = HomeModel(
-            1L,
             "avatar",
             "House",
             "N.Y",

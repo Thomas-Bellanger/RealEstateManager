@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.MutableLiveData
 import com.openclassrooms.realestatemanager.R
@@ -67,9 +68,8 @@ class ViewModel {
         uid: String,
         description: String
     ) {
-        var creationTime = Utils.getTodayDate()
+        val creationTime = Utils.getTodayDate()
         val homeToCreate = HomeModel(
-            0,
             avatar,
             type,
             city,
@@ -88,6 +88,11 @@ class ViewModel {
             false,
             ""
         )
+        for (photo:PhotoModel in listPhoto.value!!){
+            photo.homeUid=homeToCreate.uid
+            Log.e("photo",""+photo.homeUid)
+            Log.e("photo",""+photo.uid)
+        }
         homeManager.createHomeFirebase(homeToCreate)
     }
 
@@ -128,7 +133,9 @@ class ViewModel {
 
     fun getHomesFromFireStore() {
         listHomes.value = mutableListOf()
-        homeManager.homeCollection.get().addOnSuccessListener {
+        homeManager.homeCollection.get().addOnSuccessListener {for(documents in it.documents){
+            Log.e("home",""+ documents.toObject(HomeModel::class.java)?.type)
+        }
         }
     }
 }

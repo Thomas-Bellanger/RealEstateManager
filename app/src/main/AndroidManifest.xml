@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".searchActivity.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".addActivity.PhotoActivity.PhotoActivity"
             android:exported="true" />
         <activity

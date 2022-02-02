@@ -21,6 +21,5 @@
         android:id="@+id/search"
         android:icon="@drawable/baseline_search_white_24dp"
         android:title="@string/search"
-        app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom" />
 </menu>
