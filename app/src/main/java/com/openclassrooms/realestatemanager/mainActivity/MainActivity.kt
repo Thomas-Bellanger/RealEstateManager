@@ -2,47 +2,67 @@ package com.openclassrooms.realestatemanager.mainActivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.addActivity.AddActivity
 import com.openclassrooms.realestatemanager.detailActivity.DetailActivity
 import com.openclassrooms.realestatemanager.detailActivity.fragment.DetailFragment
-import com.openclassrooms.realestatemanager.domain.manager.HomeManager
 import com.openclassrooms.realestatemanager.editActivity.EditActivity
 import com.openclassrooms.realestatemanager.mainActivity.fragment.RecyclerViewFragment
 import com.openclassrooms.realestatemanager.mapActivity.MapActivity
 import com.openclassrooms.realestatemanager.model.HomeModel
+import com.openclassrooms.realestatemanager.model.LocationModel
+import com.openclassrooms.realestatemanager.model.PhotoModel
+import com.openclassrooms.realestatemanager.searchActivity.SearchActivity
+import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.viewModel.ViewModel
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
 
 
 class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
+    var dataViewModel: DataViewModel? = null
     var mainFragment: RecyclerViewFragment? = null
     var detailFragment: DetailFragment? = null
     var toolbar: androidx.appcompat.widget.Toolbar? = null
     private lateinit var drawerLayout: DrawerLayout
     private val viewModel: ViewModel? = ViewModel.getInstance()
     private var navigationView: NavigationView? = null
-    private var homeManager: HomeManager? = HomeManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel?.moneyType?.value = ViewModel.MoneyType.DOLLAR
+        configureViewModel()
         configureAndShowMainFragment()
         configureAndShowDetailFragment()
         configureToolbar()
         configureDrawerLayout()
         onDrawerOpened()
         configureNavigationView()
-        viewModel?.getHomesFromFireStore()
+        dataViewModel?.homes?.observe(this, this::compare)
+        dataViewModel?.allLocations?.observe(this, this::compareLocations)
+    }
 
+    private fun compareLocations(list: List<LocationModel>) {
+        viewModel?.getLocationsFromFireStore(this, dataViewModel!!, list)
+    }
+
+    private fun comparePhoto(list: List<PhotoModel>) {
+        dataViewModel?.let { viewModel?.getPhotosFromFireStore(this, it, list) }
+        viewModel?.listPhoto?.value = list as MutableList<PhotoModel>
     }
 
     private fun configureToolbar() {
@@ -54,7 +74,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         val inflater = menuInflater
         if (this.findViewById<FrameLayout>(R.id.frameLayoutDetail) != null) {
             inflater.inflate(R.menu.menu_toolbar_600dp, menu)
-            var edit: MenuItem? = menu?.findItem(R.id.edit)
+            val edit: MenuItem? = menu?.findItem(R.id.edit)
             edit!!.setOnMenuItemClickListener {
                 //start edit activity
                 editIntent()
@@ -68,8 +88,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
             searchIntent()
             return@setOnMenuItemClickListener true
         }
-
-        var conversion: MenuItem? = menu.findItem(R.id.convert)
+        val conversion: MenuItem? = menu.findItem(R.id.convert)
         conversion!!.setOnMenuItemClickListener {
             if (viewModel != null) {
                 if (viewModel.moneyType.value == ViewModel.MoneyType.DOLLAR) {
@@ -84,7 +103,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
             }
             return@setOnMenuItemClickListener true
         }
-        val addItem = menu.findItem(R.id.addMenu)
+        val addItem = menu.findItem(R.id.refreshMenu)
         addItem.setOnMenuItemClickListener {
             addIntent()
             return@setOnMenuItemClickListener true
@@ -93,12 +112,12 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     }
 
     private fun editIntent() {
-        var editIntent: Intent? = Intent(this, EditActivity::class.java)
+        val editIntent: Intent = Intent(this, EditActivity::class.java)
         startActivity(editIntent)
     }
 
     private fun searchIntent() {
-        var searchIntent: Intent? = Intent(this, EditActivity::class.java)
+        val searchIntent: Intent = Intent(this, SearchActivity::class.java)
         startActivity(searchIntent)
     }
 
@@ -125,7 +144,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
                 .add(R.id.frameLayoutDetail, detailFragment!!)
                 .commit()
         }
-
     }
 
     private fun configureDrawerLayout() {
@@ -147,7 +165,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         val menu = navigationView.menu
     }
 
-    fun configureNavigationView() {
+    private fun configureNavigationView() {
         navigationView = findViewById(R.id.mainNavView)
         navigationView!!.setNavigationItemSelectedListener { item: MenuItem? ->
             onNavigationSelected(
@@ -158,13 +176,12 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
 
     //menu
     private fun onNavigationSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
+        when (item.itemId) {
             R.id.mapMenu -> {
                 mapIntent()
             }
-            R.id.addMenu -> {
-                addIntent()
+            R.id.refreshMenu -> {
+                refresh()
             }
         }
         this.drawerLayout.closeDrawer(GravityCompat.START)
@@ -172,20 +189,41 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     }
 
     private fun mapIntent() {
-        var menuIntent: Intent? = Intent(this, MapActivity::class.java)
+        val menuIntent: Intent? = Intent(this, MapActivity::class.java)
+        viewModel?.home = MutableLiveData<HomeModel>()
         startActivity(menuIntent)
     }
 
     private fun addIntent() {
-        var addIntent: Intent? = Intent(this, AddActivity::class.java)
+        val addIntent: Intent = Intent(this, AddActivity::class.java)
         startActivity(addIntent)
     }
 
+    private fun refresh() {
+        if (Utils.isConnected(this)) {
+            Toast.makeText(this, "Data refreshed!", Toast.LENGTH_SHORT).show()
+            dataViewModel?.homes?.observe(this, this::compare)
+        } else {
+            Toast.makeText(this, "No internet available!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onClickResponse(home: HomeModel) {
-        viewModel!!.setMyHome(home)
+        dataViewModel?.getPhotos(home.uid)?.observe(this, this::comparePhoto)
+        viewModel!!.home.value = home
         if (detailFragment == null && this.findViewById<FrameLayout>(R.id.frameLayoutDetail) == null) {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun configureViewModel() {
+        val viewModelFactory: ViewModelFactory = Injection.provideViewModelFactory(this)
+        this.dataViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(DataViewModel::class.java)
+    }
+
+    private fun compare(list: MutableList<HomeModel>) {
+        dataViewModel?.let { viewModel?.getHomesFromFireStore(this, dataViewModel!!, list) }
     }
 }

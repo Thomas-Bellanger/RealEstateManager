@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".searchActivity.SearchActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".mainActivity.MainActivity" />
         <activity
             android:name=".addActivity.PhotoActivity.PhotoActivity"
             android:exported="true" />
@@ -28,7 +29,8 @@
             android:parentActivityName=".mainActivity.MainActivity" />
         <activity
             android:name=".editActivity.EditActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".mainActivity.MainActivity" />
         <activity
             android:name=".addActivity.AddActivity"
             android:exported="true"

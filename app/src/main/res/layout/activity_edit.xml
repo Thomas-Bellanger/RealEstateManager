@@ -14,18 +14,21 @@
         android:layout_height="wrap_content" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/editCOnstraint"
+        android:id="@+id/editConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#7C7C7C"
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/sellDateChosen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center"
-            android:text="Click on confirm to validate the sell (the property will disappear from the application)"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:text="Click here to choose the date the property has been sold then confirm!"
             app:layout_constraintBottom_toTopOf="@+id/cardView" />
 
         <androidx.cardview.widget.CardView

@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".searchActivity.SearchActivity">
+    tools:context=".searchActivity.SearchActivity"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+    <CheckBox
+        android:id="@+id/searchAvailableBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available"/>
+
+    <CheckBox
+        android:id="@+id/searchSoldBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sold"/>
+
+</LinearLayout>
+    <Spinner
+        android:id="@+id/searchTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp" />
+
+    <EditText
+        android:id="@+id/searchSurfaceMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Surface min"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchSurfaceMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Surface max"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchPriceMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Price max"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Room number"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchBedRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Bedroom number"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchBathRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Bathroom number"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/searchPhotoMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Number of photo of the property min"
+        android:layout_gravity="center"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Adress:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/searchCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="City" />
+
+    <EditText
+        android:id="@+id/searchStreet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Street" />
+
+    <EditText
+        android:id="@+id/searchPostal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Postal Code" />
+
+    <EditText
+        android:id="@+id/searchCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="country" />
+
+        <TextView
+            android:id="@+id/searchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Search for a date"/>
+
+            <Button
+                android:id="@+id/searchConfirmBtn"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:backgroundTint="@color/light_blue_A200"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

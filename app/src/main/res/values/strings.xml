@@ -19,6 +19,7 @@
     <string name="name">Name</string>
     <string name="add_a_photo">Add a photo</string>
     <string name="add_house">Add House</string>
+    <string name="refresh_house">Refresh Data</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="confirm_the_home_has_been_sold">Confirm the home has been sold?</string>
@@ -27,11 +28,17 @@
     <string-array name="Type">Spinner HouseTypes
         <item>House</item>
         <item>PentHouse</item>
-        <item>Appartment</item>
+        <item>Apartment</item>
         <item>Duplex</item>
     </string-array>
-
-    <string-array name="MoneyType">Spinner HouseTypes
+    <string-array name="SearchType">Spinner HouseTypes
+        <item>All</item>
+        <item>House</item>
+        <item>PentHouse</item>
+        <item>Apartment</item>
+        <item>Duplex</item>
+    </string-array>
+    <string-array name="MoneyType">Spinner MoneyTypes
         <item>Dollar</item>
         <item>Euro</item>
     </string-array>

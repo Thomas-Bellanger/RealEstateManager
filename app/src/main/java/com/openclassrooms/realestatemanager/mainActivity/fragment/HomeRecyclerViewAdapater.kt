@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.utils.Utils
@@ -56,6 +57,9 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
         }
 
         fun update(home: HomeModel) {
+            Glide.with(homeImage.context)
+                .load(home.avatar)
+                .into(homeImage)
             type.text = home.type
             city.text = home.city
             if (home.isSolde) {

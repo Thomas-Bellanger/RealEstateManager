@@ -7,7 +7,7 @@
         android:title="@string/convert"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/addMenu"
+        android:id="@+id/refreshMenu"
         android:icon="@drawable/baseline_home_black_24dp"
         android:title="@string/add_house"
         app:showAsAction="ifRoom" />

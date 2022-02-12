@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.editActivity
 
+import android.app.DatePickerDialog
 import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +10,20 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
 import com.openclassrooms.realestatemanager.addActivity.PhotoActivity.PhotoActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityEditBinding
+import com.openclassrooms.realestatemanager.editActivity.viewModel.EditViewModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.viewModel.ViewModel
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
+import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
 import java.util.*
 
 class EditActivity : AppCompatActivity() {
@@ -33,10 +40,15 @@ class EditActivity : AppCompatActivity() {
     private var callBackBathRoom: String = ""
     private var callBackBedRoom: String = ""
     private var callBackDescription: String = ""
-    private var callBackAppartment: String = ""
-    var viewModel = com.openclassrooms.realestatemanager.viewModel.ViewModel.getInstance()
+    private var callBackApartment: String = ""
+    var editViewModel = EditViewModel.getInstance()
+    var viewModel = ViewModel.getInstance()
     private lateinit var binding: ActivityEditBinding
     var editListPhoto: MutableList<PhotoModel> = ArrayList<PhotoModel>()
+    lateinit var dataViewModel: DataViewModel
+    var year: Int? = null
+    var month: Int? = null
+    var day: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +59,10 @@ class EditActivity : AppCompatActivity() {
         configureToolbar()
         configureSpinner()
         configureMoneySpinner()
-        configureAppartmentVisibility(false)
+        configureViewModel()
+        viewModel?.avatar = viewModel?.home?.value?.avatar.toString()
+        binding.sellDateChosen.setOnClickListener { configureDatePicker() }
+        configureApartmentVisibility(false)
         binding.editButton.setOnClickListener { configureClick() }
         binding.addPhotoBtn.setOnClickListener { photoIntent() }
         val horizontalLayoutManager =
@@ -59,11 +74,18 @@ class EditActivity : AppCompatActivity() {
                 DividerItemDecoration.HORIZONTAL
             )
         )
-        viewModel?.listPhoto?.value?.clear()
+        editViewModel?.photoToRemove?.clear()
+        editViewModel?.photoToAdd?.clear()
+        dataViewModel.getPhotos(viewModel?.home?.value?.uid).observe(this, this::setListPhoto)
         viewModel?.listPhoto?.observe(this, this::initList)
-        viewModel?.isAppartment?.observe(this, this::configureAppartmentVisibility)
+        editViewModel?.isAppartment?.observe(this, this::configureApartmentVisibility)
         configureInfo()
+        viewModel?.avatar = viewModel?.home?.value?.avatar.toString()
         binding.sellButton.setOnClickListener { confirmSell() }
+    }
+
+    private fun setListPhoto(listPhoto: List<PhotoModel>) {
+        viewModel?.listPhoto?.value = listPhoto as MutableList
     }
 
     //toolbar
@@ -92,7 +114,7 @@ class EditActivity : AppCompatActivity() {
                 id: Long
             ) {
                 callBackType = parent.getItemAtPosition(position) as String
-                viewModel?.compareString(callBackType)
+                editViewModel?.compareString(callBackType)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -101,8 +123,8 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    //show appartment number if the property is an appartment
-    private fun configureAppartmentVisibility(boolean: Boolean) {
+    //show apartment number if the property is an appartment
+    private fun configureApartmentVisibility(boolean: Boolean) {
         if (boolean) {
             binding.addAppartment.visibility = View.VISIBLE
         } else {
@@ -113,7 +135,7 @@ class EditActivity : AppCompatActivity() {
 
     //set spinner for money type
     private fun configureMoneySpinner() {
-        var moneyType = binding.addMoneyType
+        val moneyType = binding.addMoneyType
         val adapterTypes = ArrayAdapter.createFromResource(
             this,
             R.array.MoneyType,
@@ -179,7 +201,9 @@ class EditActivity : AppCompatActivity() {
         callBackBathRoom = binding.addBathRoom.text.toString()
         callBackDescription = binding.addDescription.text.toString()
         callBackBedRoom = binding.addBedRoom.text.toString()
-
+        if (binding.addAppartment.visibility != GONE) {
+            callBackApartment = binding.addAppartment.text.toString()
+        }
         when {
             callBackCity.isBlank() -> {
                 binding.addCity.error = "need a value!"
@@ -236,22 +260,21 @@ class EditActivity : AppCompatActivity() {
                     callBackPrice = Utils.convertEuroToDollar(callBackPrice.toInt()).toString()
                 }
                 editListPhoto = viewModel?.listPhoto?.value ?: editListPhoto
-                viewModel!!.createHomeFireBase(
-                    viewModel!!.avatar,
-                    callBackType,
+
+                editViewModel?.editHome(
+                    dataViewModel,
+                    this,
                     callBackCity,
-                    callBackPrice.toDouble(),
-                    callBackStreet,
-                    callBackAppartment,
-                    callBackPostal,
                     callBackCountry,
+                    callBackPostal,
+                    callBackStreet,
                     callBackSurface.toInt(),
                     callBackRoomNumber.toInt(),
+                    callBackPrice.toDouble(),
                     callBackBathRoom.toInt(),
+                    callBackDescription,
                     callBackBedRoom.toInt(),
-                    "location",
-                    "",
-                    callBackDescription
+                    callBackApartment
                 )
                 createNotif()
                 this.finish()
@@ -262,23 +285,65 @@ class EditActivity : AppCompatActivity() {
     //settings to confirm the sell
     private fun confirmSell() {
         binding.editScroll.visibility = INVISIBLE
-        binding.editCOnstraint.visibility = VISIBLE
+        binding.editConstraint.visibility = VISIBLE
         binding.editConfirmBtn.setOnClickListener { sellHome() }
         binding.editCancelBtn.setOnClickListener { cancel() }
     }
 
     //confirm home's selling
     private fun sellHome() {
-        viewModel?.home?.value?.isSolde = true
-        viewModel?.home?.value?.sellTime = Utils.getTodayDate()
-        createNotif()
-        finish()
+        if (binding.sellDateChosen.text == "Choose the date the property has been sold then confirm!") {
+            binding.sellDateChosen.error = "Click on this to choose a date"
+        } else {
+            viewModel?.home?.value?.isSolde = true
+            viewModel?.home?.value?.sellTime =
+                day.toString() + "/" + month.toString() + "/" + year.toString()
+            createNotif()
+            viewModel?.home?.value?.let {
+                editViewModel?.editHome(
+                    dataViewModel,
+                    this,
+                    callBackCity,
+                    callBackCountry,
+                    callBackPostal,
+                    callBackStreet,
+                    callBackSurface.toInt(),
+                    callBackRoomNumber.toInt(),
+                    callBackPrice.toDouble(),
+                    callBackBathRoom.toInt(),
+                    callBackDescription,
+                    callBackBedRoom.toInt(),
+                    callBackApartment
+                )
+            }
+            finish()
+        }
+    }
+
+    private fun configureDatePicker() {
+        val calendar = Calendar.getInstance()
+        year = calendar.get(Calendar.YEAR)
+        month = calendar.get(Calendar.MONTH)
+        day = calendar.get(Calendar.DAY_OF_MONTH)
+        // Date Select Listener.
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, _, dayOfMonth ->
+                binding.sellDateChosen.text = "$dayOfMonth/$month/$year"
+            }
+        // Create DatePickerDialog (Spinner Mode):
+        val datePickerDialog = DatePickerDialog(
+            this,
+            android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+            dateSetListener, year!!, month!!, day!!
+        )
+        // Show
+        datePickerDialog.show()
     }
 
     //cancel selling
     private fun cancel() {
         binding.editScroll.visibility = VISIBLE
-        binding.editCOnstraint.visibility = GONE
+        binding.editConstraint.visibility = GONE
     }
 
     //create notification
@@ -286,5 +351,12 @@ class EditActivity : AppCompatActivity() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val context = baseContext
         viewModel?.sendVisualNotification(context, notificationManager)
+    }
+
+    //dataViewModel
+    private fun configureViewModel() {
+        val viewModelFactory: ViewModelFactory = Injection.provideViewModelFactory(this)
+        this.dataViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(DataViewModel::class.java)
     }
 }

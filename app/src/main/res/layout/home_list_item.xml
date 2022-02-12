@@ -5,10 +5,9 @@
 
     <ImageView
         android:id="@+id/homeImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher_background"
-        android:src="@drawable/baseline_home_red_500_36dp" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"

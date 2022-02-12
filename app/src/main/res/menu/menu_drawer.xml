@@ -6,8 +6,8 @@
             android:icon="@drawable/baseline_room_black_24dp"
             android:title="MAP" />
         <item
-            android:id="@+id/addMenu"
-            android:icon="@drawable/baseline_home_black_24dp"
-            android:title="@string/add_house" />
+            android:id="@+id/refreshMenu"
+            android:icon="@drawable/refresh_white_24dp"
+            android:title="@string/refresh_house" />
     </group>
 </menu>

@@ -4,83 +4,70 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class HomeModel{
-    @PrimaryKey
-    var uid: Long=0
-    lateinit var avatar: String
-    lateinit var type: String
-    lateinit var city: String
-    var price: Double=0.0
-    lateinit var street: String
-    var appartment: String? = null
-    lateinit var postalCode: String
-    lateinit var country: String
-    var surface: Int = 0
-    var roomNumber: Int = 0
-    var bathRoomNumber: Int = 0
-    var bedRoomNumber: Int = 0
-    lateinit var location: String
-    lateinit var description: String
-    lateinit var creationTime: String
-    var isSolde: Boolean=false
-    lateinit var sellTime: String
+data class HomeModel(
+    @PrimaryKey(autoGenerate = true)
+    var uid: Long = 0,
+    var avatar: String = "",
+    var type: String = "",
+    var city: String = "",
+    var price: Double = 0.0,
+    var street: String = "",
+    var appartment: String? = null,
+    var postalCode: String = "",
+    var country: String = "",
+    var surface: Int = 0,
+    var roomNumber: Int = 0,
+    var bathRoomNumber: Int = 0,
+    var bedRoomNumber: Int = 0,
+    var photoNumber: Int = 0,
+    var description: String = "",
+    var creationTime: String = "",
+    var isSolde: Boolean = false,
+    var sellTime: String = "",
+    var lastModifTime: String = ""
+) {
+    constructor() : this(+1)
 
-    constructor(avatar: String,
-                type: String,
-                city: String,
-                price: Double,
-                street: String,
-                appartment: String?,
-                postalCode: String,
-                country: String,
-                surface: Int,
-                roomNumber: Int,
-                bathRoomNumber: Int,
-                bedRoomNumber: Int,
-                location: String,
-                description: String,
-                creationTime: String,
-                isSolde: Boolean,
-                sellTime: String)
-    constructor(){}
     companion object {
         var testHome = HomeModel(
-            "avatar",
-            "Penthouse",
-            "L.A",
-            1000.00,
-            "3 rue de france",
-            null,
-            "77950",
-            "United States",
-            80,
-            4,
-            1,
-            2,
-            "location",
-            "for test purpose",
-            "30/01/22",
-            false,
-            ""
+            avatar = "avatar",
+            type = "Penthouse",
+            city = "L.A",
+            price = 1000.00,
+            street = "3 rue de france",
+            appartment = null,
+            postalCode = "77950",
+            country = "United States",
+            surface = 80,
+            roomNumber = 4,
+            bedRoomNumber = 2,
+            bathRoomNumber = 1,
+            photoNumber = 1,
+            description = "for test purpose",
+            creationTime = "30/01/22",
+            isSolde = false,
+            sellTime = "",
+            lastModifTime = "30/01/22"
         )
         var testHome2 = HomeModel(
-            "avatar",
-            "House",
-            "N.Y",
-            5000.00,
-            "18 rue de L.A",
-            null,
-            "90516",
-            "United States",
-            60,
-            2,
-            1,
-            2,
-            "location",
-            "for test purpose",
-            "30/01/22",
-            true,
-            "30/01/22"
+            avatar = "avatar",
+            type = "Duplex",
+            city = "N.Y",
+            price = 2000.00,
+            street = "30 rue de NY",
+            appartment = null,
+            postalCode = "49055",
+            country = "United States",
+            surface = 90,
+            roomNumber = 5,
+            bedRoomNumber = 2,
+            bathRoomNumber = 3,
+            photoNumber = 1,
+            description = "for test purpose",
+            creationTime = "30/01/21",
+            isSolde = true,
+            sellTime = "05/02/21",
+            lastModifTime = "05/02/21"
         )
     }
 }
