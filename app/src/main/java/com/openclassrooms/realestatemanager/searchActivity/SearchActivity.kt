@@ -8,19 +8,16 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchBinding
 import com.openclassrooms.realestatemanager.model.HomeModel
-import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
-import java.sql.Time
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,7 +64,7 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun afterFilter(list:List<HomeModel>){
+    private fun afterFilter(list: List<HomeModel>) {
         finish()
     }
 
@@ -156,16 +153,16 @@ class SearchActivity : AppCompatActivity() {
         if (binding.searchPhotoMin.text.isNotBlank()) {
             photoNumber = binding.searchPhotoMin.text.toString().toInt()
         }
-        if(binding.searchStreet.text.isNotBlank()){
+        if (binding.searchStreet.text.isNotBlank()) {
             street = binding.searchStreet.text.toString()
         }
-        if(binding.searchCity.text.isNotBlank()){
+        if (binding.searchCity.text.isNotBlank()) {
             city = binding.searchCity.text.toString()
         }
-        if(binding.searchCountry.text.isNotBlank()){
+        if (binding.searchCountry.text.isNotBlank()) {
             country = binding.searchCountry.text.toString()
         }
-        if(binding.searchPostal.text.isNotBlank()){
+        if (binding.searchPostal.text.isNotBlank()) {
             postal = binding.searchPostal.text.toString()
         }
         val dataViewModel: DataViewModel = dataViewModel

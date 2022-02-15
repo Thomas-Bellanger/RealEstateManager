@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.constants.Style
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -54,6 +53,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, MapQuestRepository.
     @SuppressLint("MissingPermission")
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.map = mapboxMap
+        map.uiSettings.isZoomControlsEnabled = true
         acceptPermission()
     }
 
@@ -150,24 +150,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, MapQuestRepository.
         viewModel!!.home.value = list[mapViewModel.index]
         val editIntent = Intent(this, DetailActivity::class.java)
         startActivity(editIntent)
-    }
-
-    private fun setCamera(list: MutableList<HomeModel>) {
-        if (viewModel?.home != null) {
-            val homeView = viewModel?.home!!.value
-            for (home in list) {
-                if (home.uid == homeView?.uid) {
-                    val homeIndex = list.indexOf(home)
-                    val position = mapViewModel.markerList[homeIndex].position
-                    val cameraPosition = CameraPosition.Builder()
-                        .target(LatLng(position))
-                        .zoom(10.0)
-                        .tilt(20.0)
-                        .build()
-                    map.cameraPosition = cameraPosition
-                }
-            }
-        }
     }
 
     private fun configureViewModel() {

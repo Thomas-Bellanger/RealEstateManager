@@ -6,7 +6,6 @@ import android.content.Context
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.MutableLiveData
@@ -195,12 +194,22 @@ class ViewModel {
                 }
                 if (!isContainedInFb) {
                     val imageUri = Uri.parse(photoModel.image)
-                    photoManager.changeImageForUrl(imageUri, photoModel, photoModel.uid.toString(), photoModel.homeUid.toString())
+                    photoManager.changeImageForUrl(
+                        imageUri,
+                        photoModel,
+                        photoModel.uid.toString(),
+                        photoModel.homeUid.toString()
+                    )
                 }
             }
         } else {
             val imageUri = Uri.parse(photoModel.image)
-            photoManager.changeImageForUrl(imageUri, photoModel, photoModel.uid.toString(), photoModel.homeUid.toString())
+            photoManager.changeImageForUrl(
+                imageUri,
+                photoModel,
+                photoModel.uid.toString(),
+                photoModel.homeUid.toString()
+            )
         }
     }
 

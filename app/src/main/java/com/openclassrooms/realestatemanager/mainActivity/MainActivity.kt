@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.mainActivity
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
@@ -31,12 +30,8 @@ import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
-import pub.devrel.easypermissions.EasyPermissions
-
-import androidx.annotation.NonNull
-import com.openclassrooms.realestatemanager.domain.firebaseManager.PhotoManager
-import com.openclassrooms.realestatemanager.domain.firebaseRepository.PhotoRepository
 import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 
 
 class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
@@ -66,15 +61,18 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         dataViewModel?.allLocations?.observe(this, this::compareLocations)
     }
 
+    //compare location with firebase
     private fun compareLocations(list: List<LocationModel>) {
         viewModel?.getLocationsFromFireStore(this, dataViewModel!!, list)
     }
 
+    //compare photo with firebase
     private fun comparePhoto(list: List<PhotoModel>) {
         dataViewModel?.let { viewModel?.getPhotosFromFireStore(this, it, list) }
         viewModel?.listPhoto?.value = list as MutableList<PhotoModel>
     }
 
+    //toolbar
     private fun configureToolbar() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -89,11 +87,12 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
+    //permission
     @AfterPermissionGranted(100)
     private fun addFile() {
         if (!EasyPermissions.hasPermissions(this, PERMS)) {
             EasyPermissions.requestPermissions(
-                this,"title_permission_files_access",
+                this, "title_permission_files_access",
                 RC_IMAGE_PERMS,
                 PERMS
             )
@@ -102,6 +101,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         dataViewModel?.homes?.observe(this, this::compare)
         Toast.makeText(this, "Thank you for your permission!", Toast.LENGTH_SHORT).show()
     }
+
+    //options menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         if (this.findViewById<FrameLayout>(R.id.frameLayoutDetail) != null) {
@@ -143,11 +144,13 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         return true
     }
 
+    //edit intent
     private fun editIntent() {
         val editIntent: Intent = Intent(this, EditActivity::class.java)
         startActivity(editIntent)
     }
 
+    //search intent
     private fun searchIntent() {
         val searchIntent: Intent = Intent(this, SearchActivity::class.java)
         startActivity(searchIntent)
@@ -167,6 +170,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         }
     }
 
+    //detail fragment
     private fun configureAndShowDetailFragment() {
         detailFragment =
             supportFragmentManager.findFragmentById(R.id.frameLayoutDetail) as DetailFragment?
@@ -178,9 +182,10 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         }
     }
 
+    //drawer
     private fun configureDrawerLayout() {
         this.drawerLayout = findViewById(R.id.drawer_Layout)
-        var toggle = ActionBarDrawerToggle(
+        val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
             toolbar,
@@ -197,6 +202,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         val menu = navigationView.menu
     }
 
+    //navigation menu
     private fun configureNavigationView() {
         navigationView = findViewById(R.id.mainNavView)
         navigationView!!.setNavigationItemSelectedListener { item: MenuItem? ->
@@ -220,17 +226,20 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         return false
     }
 
+    //map intent
     private fun mapIntent() {
         val menuIntent: Intent? = Intent(this, MapActivity::class.java)
         viewModel?.home = MutableLiveData<HomeModel>()
         startActivity(menuIntent)
     }
 
+    //addIntent
     private fun addIntent() {
         val addIntent: Intent = Intent(this, AddActivity::class.java)
         startActivity(addIntent)
     }
 
+    //refresh the data if the user is online
     private fun refresh() {
         if (Utils.isConnected(this)) {
             Toast.makeText(this, "Data refreshed!", Toast.LENGTH_SHORT).show()
@@ -240,6 +249,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         }
     }
 
+    //intent for detail fragment and detail activity (if screen size is < 600dp)
     override fun onClickResponse(home: HomeModel) {
         dataViewModel?.getPhotos(home.uid)?.observe(this, this::comparePhoto)
         viewModel!!.home.value = home
@@ -249,12 +259,14 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         }
     }
 
+    //dataviewmodel
     private fun configureViewModel() {
         val viewModelFactory: ViewModelFactory = Injection.provideViewModelFactory(this)
         this.dataViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(DataViewModel::class.java)
     }
 
+    //compare the list from the phone with firestore
     private fun compare(list: MutableList<HomeModel>) {
         dataViewModel?.let { viewModel?.getHomesFromFireStore(this, dataViewModel!!, list) }
     }
