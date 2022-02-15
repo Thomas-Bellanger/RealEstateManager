@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.firebaseManager.HomeManager
 import com.openclassrooms.realestatemanager.domain.firebaseManager.LocationManager
 import com.openclassrooms.realestatemanager.domain.firebaseManager.PhotoManager
+import com.openclassrooms.realestatemanager.domain.firebaseRepository.PhotoRepository
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.model.LocationModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
@@ -34,6 +36,7 @@ class ViewModel {
     var listHomesFull: MutableList<HomeModel> = mutableListOf()
     var listHomesFiltered: MutableLiveData<MutableList<HomeModel>> =
         MutableLiveData<MutableList<HomeModel>>()
+    val photoRepository: PhotoRepository = PhotoRepository.getInstance()
     var avatar: String = ""
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
@@ -191,11 +194,13 @@ class ViewModel {
                     isContainedInFb = true
                 }
                 if (!isContainedInFb) {
-                    photoManager.createPhotoFirebase(photoModel)
+                    val imageUri = Uri.parse(photoModel.image)
+                    photoManager.changeImageForUrl(imageUri, photoModel, photoModel.uid.toString(), photoModel.homeUid.toString())
                 }
             }
         } else {
-            photoManager.createPhotoFirebase(photoModel)
+            val imageUri = Uri.parse(photoModel.image)
+            photoManager.changeImageForUrl(imageUri, photoModel, photoModel.uid.toString(), photoModel.homeUid.toString())
         }
     }
 

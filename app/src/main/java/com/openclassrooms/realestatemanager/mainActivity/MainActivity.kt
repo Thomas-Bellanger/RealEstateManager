@@ -34,6 +34,8 @@ import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFac
 import pub.devrel.easypermissions.EasyPermissions
 
 import androidx.annotation.NonNull
+import com.openclassrooms.realestatemanager.domain.firebaseManager.PhotoManager
+import com.openclassrooms.realestatemanager.domain.firebaseRepository.PhotoRepository
 import pub.devrel.easypermissions.AfterPermissionGranted
 
 
