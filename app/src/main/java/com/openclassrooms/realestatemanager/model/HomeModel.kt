@@ -22,7 +22,7 @@ data class HomeModel(
     var photoNumber: Int = 0,
     var description: String = "",
     var creationTime: String = "",
-    var isSolde: Boolean = false,
+    var isSold: Boolean = false,
     var sellTime: String = "",
     var lastModifTime: String = ""
 ) {
@@ -45,7 +45,7 @@ data class HomeModel(
             photoNumber = 1,
             description = "for test purpose",
             creationTime = "30/01/22",
-            isSolde = false,
+            isSold = false,
             sellTime = "",
             lastModifTime = "30/01/22"
         )
@@ -65,7 +65,7 @@ data class HomeModel(
             photoNumber = 1,
             description = "for test purpose",
             creationTime = "30/01/21",
-            isSolde = true,
+            isSold = true,
             sellTime = "05/02/21",
             lastModifTime = "05/02/21"
         )

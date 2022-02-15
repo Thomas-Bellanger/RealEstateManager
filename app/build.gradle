@@ -56,6 +56,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'
 
+    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
+
     // FIREBASE UI
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.google.firebase:firebase-firestore'

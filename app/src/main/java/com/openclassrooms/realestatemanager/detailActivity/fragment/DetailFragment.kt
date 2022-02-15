@@ -104,7 +104,7 @@ class DetailFragment : Fragment() {
         country.text = home.country
         description.text = home.description
         createTime.text = "On-sale date:" + home.creationTime
-        if (home.isSolde) {
+        if (home.isSold) {
             sellTime.visibility = VISIBLE
             sellTime.text = "Date of sale:" + home.sellTime
         }

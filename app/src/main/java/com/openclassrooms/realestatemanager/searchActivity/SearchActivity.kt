@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +20,9 @@ import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
+import java.sql.Time
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -29,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
     lateinit var viewModel: ViewModel
     var year: Int? = null
     var month: Int? = null
-    var day: Int? = null
+    private var day: Int? = null
     var type: String = ""
     private val listToRemove = mutableListOf<HomeModel>()
     lateinit var dataViewModel: DataViewModel
@@ -42,6 +46,11 @@ class SearchActivity : AppCompatActivity() {
     var bedRoomNumber: Int = 0
     var bathRoomNumber: Int = 0
     var photoNumber: Int = 0
+    var date = ""
+    var street = ""
+    var country = ""
+    var postal = ""
+    var city = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +64,11 @@ class SearchActivity : AppCompatActivity() {
         viewModel.listHomesFiltered.value = mutableListOf()
         binding.searchDate.setOnClickListener { configureDatePicker() }
         binding.searchConfirmBtn.setOnClickListener { startSearching() }
-        Log.e("number", "" + binding.searchSurfaceMin.text.toString())
+
+    }
+
+    private fun afterFilter(list:List<HomeModel>){
+        finish()
     }
 
     //toolbar
@@ -92,7 +105,6 @@ class SearchActivity : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
                     type = parent.getItemAtPosition(0) as String
-                    Log.e("type", type)
                 }
             }
         }
@@ -105,8 +117,11 @@ class SearchActivity : AppCompatActivity() {
         day = calendar.get(Calendar.DAY_OF_MONTH)
         // Date Select Listener.
         val dateSetListener =
-            OnDateSetListener { _, year, _, dayOfMonth ->
-                binding.searchDate.text = "$dayOfMonth/$month/$year"
+            OnDateSetListener { _, year, month, dayOfMonth ->
+                val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+                calendar.set(year, month, dayOfMonth)
+                binding.searchDate.text = dateFormat.format(calendar.time)
+                date = dateFormat.format(calendar.time)
             }
         // Create DatePickerDialog (Spinner Mode):
         val datePickerDialog = DatePickerDialog(
@@ -118,7 +133,7 @@ class SearchActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    //button clicked
+    //button clicked, check and get the info to filter
     private fun startSearching() {
         if (binding.searchSurfaceMin.text.isNotBlank()) {
             surfaceMin = binding.searchSurfaceMin.text.toString().toInt()
@@ -141,10 +156,24 @@ class SearchActivity : AppCompatActivity() {
         if (binding.searchPhotoMin.text.isNotBlank()) {
             photoNumber = binding.searchPhotoMin.text.toString().toInt()
         }
+        if(binding.searchStreet.text.isNotBlank()){
+            street = binding.searchStreet.text.toString()
+        }
+        if(binding.searchCity.text.isNotBlank()){
+            city = binding.searchCity.text.toString()
+        }
+        if(binding.searchCountry.text.isNotBlank()){
+            country = binding.searchCountry.text.toString()
+        }
+        if(binding.searchPostal.text.isNotBlank()){
+            postal = binding.searchPostal.text.toString()
+        }
         val dataViewModel: DataViewModel = dataViewModel
         val lifecycleOwner: LifecycleOwner = this
 
         searchViewModel?.filter(
+            binding.searchAvailableBox.isChecked,
+            binding.searchSoldBox.isChecked,
             type,
             surfaceMin,
             surfaceMax,
@@ -153,22 +182,16 @@ class SearchActivity : AppCompatActivity() {
             bedRoomNumber,
             bathRoomNumber,
             photoNumber,
+            street,
+            city,
+            country,
+            postal,
+            date,
             dataViewModel,
-            lifecycleOwner
+            lifecycleOwner,
+            this
         )
-    }
-
-    //check the number of photos for the home
-    private fun checkPhotoNumber(list: MutableList<PhotoModel>) {
-        Log.e("list to filter", "" + list.size)
-        if (list.size < binding.searchPhotoMin.text.toString().toInt()) {
-            listToRemove.add(home!!)
-        }
-    }
-
-    private fun clear(list: MutableList<HomeModel>) {
-
-        finish()
+        viewModel.listHomesFiltered.observe(this, this::afterFilter)
     }
 
     private fun configureViewModel() {

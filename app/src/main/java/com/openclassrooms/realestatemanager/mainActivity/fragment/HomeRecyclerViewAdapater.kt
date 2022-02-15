@@ -62,7 +62,7 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
                 .into(homeImage)
             type.text = home.type
             city.text = home.city
-            if (home.isSolde) {
+            if (home.isSold) {
                 price.text = "Sold!"
             } else {
                 if (viewModel!!.moneyType.value!! == ViewModel.MoneyType.DOLLAR) {

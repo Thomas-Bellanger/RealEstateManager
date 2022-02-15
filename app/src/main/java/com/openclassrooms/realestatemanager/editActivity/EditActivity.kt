@@ -295,7 +295,7 @@ class EditActivity : AppCompatActivity() {
         if (binding.sellDateChosen.text == "Choose the date the property has been sold then confirm!") {
             binding.sellDateChosen.error = "Click on this to choose a date"
         } else {
-            viewModel?.home?.value?.isSolde = true
+            viewModel?.home?.value?.isSold = true
             viewModel?.home?.value?.sellTime =
                 day.toString() + "/" + month.toString() + "/" + year.toString()
             createNotif()

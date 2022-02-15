@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.mainActivity
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,10 @@ import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
+import pub.devrel.easypermissions.EasyPermissions
+
+import androidx.annotation.NonNull
+import pub.devrel.easypermissions.AfterPermissionGranted
 
 
 class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
@@ -40,10 +45,14 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     private lateinit var drawerLayout: DrawerLayout
     private val viewModel: ViewModel? = ViewModel.getInstance()
     private var navigationView: NavigationView? = null
+    private val PERMS: String = Manifest.permission.READ_EXTERNAL_STORAGE
+    private val RC_IMAGE_PERMS = 100
+    private val RC_CHOOSE_PHOTO = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        addFile()
         viewModel?.moneyType?.value = ViewModel.MoneyType.DOLLAR
         configureViewModel()
         configureAndShowMainFragment()
@@ -52,7 +61,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         configureDrawerLayout()
         onDrawerOpened()
         configureNavigationView()
-        dataViewModel?.homes?.observe(this, this::compare)
         dataViewModel?.allLocations?.observe(this, this::compareLocations)
     }
 
@@ -70,6 +78,28 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
         setSupportActionBar(toolbar)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    @AfterPermissionGranted(100)
+    private fun addFile() {
+        if (!EasyPermissions.hasPermissions(this, PERMS)) {
+            EasyPermissions.requestPermissions(
+                this,"title_permission_files_access",
+                RC_IMAGE_PERMS,
+                PERMS
+            )
+            return
+        }
+        dataViewModel?.homes?.observe(this, this::compare)
+        Toast.makeText(this, "Thank you for your permission!", Toast.LENGTH_SHORT).show()
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         if (this.findViewById<FrameLayout>(R.id.frameLayoutDetail) != null) {
