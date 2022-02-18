@@ -32,13 +32,12 @@ class SearchActivity : AppCompatActivity() {
     var month: Int? = null
     private var day: Int? = null
     var type: String = ""
-    private val listToRemove = mutableListOf<HomeModel>()
     lateinit var dataViewModel: DataViewModel
     var home: HomeModel? = null
     private val searchViewModel = SearchViewModel.getInstance()
     var surfaceMin: Int = 0
-    var surfaceMax: Int = 99999
-    var priceMax: Double = 9999999999.0
+    var surfaceMax: Int = Int.MAX_VALUE
+    private var priceMax: Double = Double.MAX_VALUE
     var roomNumber: Int = 0
     var bedRoomNumber: Int = 0
     var bathRoomNumber: Int = 0
@@ -184,6 +183,10 @@ class SearchActivity : AppCompatActivity() {
             country,
             postal,
             date,
+            binding.checkTrain.isChecked,
+            binding.checkShop.isChecked,
+            binding.checkSchool.isChecked,
+            binding.checkPark.isChecked,
             dataViewModel,
             lifecycleOwner,
             this

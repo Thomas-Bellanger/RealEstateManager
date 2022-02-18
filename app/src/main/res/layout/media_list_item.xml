@@ -9,7 +9,8 @@
         android:id="@+id/mediaListItemImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@color/white" />
+        android:src="@color/white"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/mediaListItemText"

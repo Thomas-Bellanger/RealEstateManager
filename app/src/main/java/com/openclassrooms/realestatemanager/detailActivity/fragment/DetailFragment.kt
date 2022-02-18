@@ -1,6 +1,11 @@
 package com.openclassrooms.realestatemanager.detailActivity.fragment
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -12,6 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.PhotoRecyclerVIewAdapter
 import com.openclassrooms.realestatemanager.model.HomeModel
@@ -24,6 +31,9 @@ import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import java.io.ByteArrayOutputStream
+import java.lang.Exception
+
 
 class DetailFragment : Fragment() {
     private val viewModel: ViewModel? = ViewModel.getInstance()
@@ -93,6 +103,7 @@ class DetailFragment : Fragment() {
         bathRooms.text = home.bathRoomNumber.toString()
         bedRooms.text = home.bedRoomNumber.toString()
         adressNumber.text = home.street
+        view?.findViewById<TextView>(R.id.inCharge)?.text = "Agent in charge : "+home.sellerName
         home.appartment.let {
             appartment.text = it ?: ""
         }
@@ -109,13 +120,26 @@ class DetailFragment : Fragment() {
             sellTime.text = "Date of sale:" + home.sellTime
         }
         dataViewModel?.getLocation(home.uid)?.observe(this, this::getStaticMap)
+        if(home.park){
+            view?.findViewById<ImageView>(R.id.parkIcon)?.visibility = VISIBLE
+        }
+        if(home.school){
+            view?.findViewById<ImageView>(R.id.schoolIcon)?.visibility = VISIBLE
+        }
+        if (home.shops){
+            view?.findViewById<ImageView>(R.id.shopIcon)?.visibility = VISIBLE
+        }
+        if(home.station){
+            view?.findViewById<ImageView>(R.id.trainIcon)?.visibility = VISIBLE
+        }
     }
 
     private fun getStaticMap(location: LocationModel) {
-        Glide.with(detailImage.context)
-            .load(location.url)
-            .into(detailImage)
+        val encodeByte: ByteArray = Base64.decode(location.url, Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
+        detailImage.setImageBitmap(bitmap)
     }
+
 
     //change price with money type
     private fun changeMoney(money: ViewModel.MoneyType) {

@@ -261,7 +261,35 @@
             </LinearLayout>
 
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/schoolIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/school_blue_600_36dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/trainIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_train_blue_600_36dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/shopIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shopping_cart_blue_600_36dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/parkIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/park_blue_600_36dp"
+                android:visibility="gone"/>
+        </LinearLayout>
         <ImageView
             android:id="@+id/detailImage"
             android:layout_width="200dp"
@@ -321,6 +349,12 @@
                 android:text="Sell time:"
                 android:visibility="gone" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/inCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In charge:"
+            android:gravity="center"/>
     </LinearLayout>
 
 </ScrollView>

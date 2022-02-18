@@ -6,6 +6,7 @@ import android.content.Context
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +14,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.firebaseManager.HomeManager
 import com.openclassrooms.realestatemanager.domain.firebaseManager.LocationManager
 import com.openclassrooms.realestatemanager.domain.firebaseManager.PhotoManager
-import com.openclassrooms.realestatemanager.domain.firebaseRepository.PhotoRepository
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.model.LocationModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
@@ -35,7 +35,6 @@ class ViewModel {
     var listHomesFull: MutableList<HomeModel> = mutableListOf()
     var listHomesFiltered: MutableLiveData<MutableList<HomeModel>> =
         MutableLiveData<MutableList<HomeModel>>()
-    val photoRepository: PhotoRepository = PhotoRepository.getInstance()
     var avatar: String = ""
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
@@ -95,14 +94,14 @@ class ViewModel {
                     for (documents in it.documents) {
                         val home = documents.toObject(HomeModel::class.java)
                         if (home != null) {
-                            compareToDb(home, dataViewModel, list)
+                            compareToDb(home, dataViewModel, list, context)
                             listHomes.add(home)
                         }
                     }
                 }
             }
             for (home in list) {
-                compareTofB(home, dataViewModel)
+                compareTofB(home, dataViewModel, context)
             }
         } else {
             Toast.makeText(context, "No internet Available", Toast.LENGTH_SHORT).show()
@@ -111,16 +110,16 @@ class ViewModel {
     }
 
     //compare the home list from db to firebase
-    private fun compareTofB(home: HomeModel, dataViewModel: DataViewModel) {
+    private fun compareTofB(home: HomeModel, dataViewModel: DataViewModel, context: Context) {
         var isContainedInDb = false
         if (listHomes.isNotEmpty()) {
             for (homeFb in listHomes) {
                 if (home.uid == homeFb.uid) {
                     isContainedInDb = true
-                    compareHome(homeFb, home, dataViewModel)
+                    compareHome(homeFb, home, dataViewModel, context)
                 }
                 if (!isContainedInDb) {
-                    dataViewModel.createHome(homeFb, true, dataViewModel)
+                    dataViewModel.createHome(homeFb, true, dataViewModel, context)
                 }
             }
         } else {
@@ -129,27 +128,27 @@ class ViewModel {
     }
 
     //compare the data from firebase to db
-    private fun compareToDb(home: HomeModel, dataViewModel: DataViewModel, list: List<HomeModel>) {
+    private fun compareToDb(home: HomeModel, dataViewModel: DataViewModel, list: List<HomeModel>, context: Context) {
         var isContainedInFb = false
         if (list.isNotEmpty()) {
             for (homeDb in list) {
                 if (home.uid == homeDb.uid) {
                     isContainedInFb = true
-                    compareHome(home, homeDb, dataViewModel)
+                    compareHome(home, homeDb, dataViewModel, context)
                 }
                 if (!isContainedInFb) {
                     homeManager.createHomeFirebase(homeDb)
                 }
             }
         } else {
-            dataViewModel.createHome(home, true, dataViewModel)
+            dataViewModel.createHome(home, true, dataViewModel, context)
         }
     }
 
     //compare the home to check which was the last modified
-    private fun compareHome(home: HomeModel, homeDb: HomeModel, dataViewModel: DataViewModel) {
+    private fun compareHome(home: HomeModel, homeDb: HomeModel, dataViewModel: DataViewModel, context: Context) {
         if (home.lastModifTime > homeDb.lastModifTime) {
-            dataViewModel.createHome(home, true, dataViewModel)
+            dataViewModel.createHome(home, true, dataViewModel, context)
         } else {
             homeManager.createHomeFirebase(homeDb)
         }
@@ -204,6 +203,7 @@ class ViewModel {
             }
         } else {
             val imageUri = Uri.parse(photoModel.image)
+            Log .e("uri", ""+imageUri)
             photoManager.changeImageForUrl(
                 imageUri,
                 photoModel,

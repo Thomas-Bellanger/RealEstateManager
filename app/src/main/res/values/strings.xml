@@ -24,6 +24,28 @@
     <string name="confirm">Confirm</string>
     <string name="confirm_the_home_has_been_sold">Confirm the home has been sold?</string>
     <string name="price">Price</string>
+    <string name="what_s_your_name">What\'s your name?</string>
+    <string name="point_of_interest">Points of interest:</string>
+    <string name="shops">Shops</string>
+    <string name="school">School</string>
+    <string name="station">Station</string>
+    <string name="park">Park</string>
+    <string name="agent_in_charge">Agent in charge</string>
+    <string name="search_for_a_date">Search for a date</string>
+    <string name="country">country</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="adress">Adress:</string>
+    <string name="number_of_photo_of_the_property_min">Number of photo of the property min</string>
+    <string name="bathroom_number">Bathroom number</string>
+    <string name="bedroom_number">Bedroom number</string>
+    <string name="room_number">Room number</string>
+    <string name="price_max">Price max</string>
+    <string name="surface_max">Surface max</string>
+    <string name="surface_min">Surface min</string>
+    <string name="sold">Sold</string>
+    <string name="available">Available</string>
     <!-- Spinner -->
     <string-array name="Type">Spinner HouseTypes
         <item>House</item>

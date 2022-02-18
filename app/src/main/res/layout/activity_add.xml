@@ -13,7 +13,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7C7C7C"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/agent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:hint="@string/what_s_your_name"
+            app:layout_constraintBottom_toTopOf="@+id/cardView" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/addCancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#FD2323"
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/addConfirmBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:backgroundTint="#009688"
+                    android:text="@string/confirm" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
+        android:id="@+id/addScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -181,6 +231,40 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="Description" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/point_of_interest"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/checkSchool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/school"/>
+                <CheckBox
+                    android:id="@+id/checkShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shops"/>
+                <CheckBox
+                    android:id="@+id/checkPark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/park"/>
+                <CheckBox
+                    android:id="@+id/checkTrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/station"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/addPhotoBtn"

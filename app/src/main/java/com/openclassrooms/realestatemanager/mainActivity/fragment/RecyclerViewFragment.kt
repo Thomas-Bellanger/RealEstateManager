@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.mainActivity.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,9 +30,8 @@ class RecyclerViewFragment : Fragment(), Callback {
     var listHomes: List<HomeModel> = ArrayList()
     private val viewModel: ViewModel? = ViewModel.getInstance()
     var dataViewModel: DataViewModel? = null
-    private val mMainViewModel: DataViewModel? = null
-    private val HOME_ID: Long = 1
     private var cancelBtn: Button? = null
+    var selectedView: View? = null
 
     interface Callbacks {
         fun onClickResponse(home: HomeModel)
@@ -72,9 +72,15 @@ class RecyclerViewFragment : Fragment(), Callback {
     // 1 - Configure item click on RecyclerView
     private fun configureOnClickRecyclerView(homes: List<HomeModel>) {
         val callback: Callbacks = activity as Callbacks
+        if (selectedView != null) {
+            selectedView?.setBackgroundColor(Color.WHITE)
+        }
+
         ItemClickSupport.addTo(recyclerView!!, R.layout.home_list_item)
-            .setOnItemClickListener { _, position, _ ->
+            .setOnItemClickListener { _, position, itemView ->
                 callback.onClickResponse(homes[position])
+                itemView?.setBackgroundColor(Color.GREEN)
+                selectedView = itemView
             }
     }
 
@@ -104,5 +110,10 @@ class RecyclerViewFragment : Fragment(), Callback {
             cancelBtn?.visibility = GONE
         }
         viewModel?.listHomesFull = homes as MutableList<HomeModel>
+    }
+
+    override fun onPause() {
+        super.onPause()
+        selectedView?.setBackgroundColor(Color.WHITE)
     }
 }

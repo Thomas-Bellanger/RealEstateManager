@@ -24,7 +24,12 @@ data class HomeModel(
     var creationTime: String = "",
     var isSold: Boolean = false,
     var sellTime: String = "",
-    var lastModifTime: String = ""
+    var lastModifTime: String = "",
+    var sellerName: String ="",
+    var school:Boolean = false,
+    var shops: Boolean = false,
+    var station: Boolean = false,
+    var park: Boolean = false
 ) {
     constructor() : this(+1)
 
@@ -47,7 +52,12 @@ data class HomeModel(
             creationTime = "30/01/22",
             isSold = false,
             sellTime = "",
-            lastModifTime = "30/01/22"
+            lastModifTime = "30/01/22",
+            sellerName ="",
+            school = true,
+            shops = false,
+            station = false,
+            park = false
         )
         var testHome2 = HomeModel(
             avatar = "avatar",
@@ -67,7 +77,12 @@ data class HomeModel(
             creationTime = "30/01/21",
             isSold = true,
             sellTime = "05/02/21",
-            lastModifTime = "05/02/21"
+            lastModifTime = "05/02/21",
+            sellerName ="",
+            school = true,
+            shops = false,
+            station = false,
+            park = false
         )
     }
 }

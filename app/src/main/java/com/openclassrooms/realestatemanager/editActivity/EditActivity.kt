@@ -24,6 +24,8 @@ import com.openclassrooms.realestatemanager.viewModel.ViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.DataViewModel
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.Injection
 import com.openclassrooms.realestatemanager.viewModel.dataViewModel.ViewModelFactory
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class EditActivity : AppCompatActivity() {
@@ -41,6 +43,8 @@ class EditActivity : AppCompatActivity() {
     private var callBackBedRoom: String = ""
     private var callBackDescription: String = ""
     private var callBackApartment: String = ""
+    private var sellDate = ""
+    private var callBackAgent = ""
     var editViewModel = EditViewModel.getInstance()
     var viewModel = ViewModel.getInstance()
     private lateinit var binding: ActivityEditBinding
@@ -162,30 +166,37 @@ class EditActivity : AppCompatActivity() {
     //set the views with home's information
     private fun configureInfo() {
         val homeModel = viewModel?.home?.value
-        if (binding.addAppartment.visibility == VISIBLE) {
-            binding.addAppartment.setText(homeModel?.appartment)
+        if (homeModel != null) {
+            if (binding.addAppartment.visibility == VISIBLE) {
+                binding.addAppartment.setText(homeModel.appartment)
+            }
+            homeModel.bathRoomNumber.let { binding.addBathRoom.setText(it.toString()) }
+            homeModel.roomNumber.let { binding.addRoom.setText(it.toString()) }
+            homeModel.bedRoomNumber.let { binding.addBedRoom.setText(it.toString()) }
+            homeModel.surface.let { binding.addSurface.setText(it.toString()) }
+            homeModel.street.let { binding.addStreet.setText(it) }
+            homeModel.country.let { binding.addCountry.setText(it) }
+            homeModel.city.let { binding.addCity.setText(it) }
+            homeModel.postalCode.let { binding.addPostal.setText(it) }
+            homeModel.price.let { binding.addPrice.setText(it.toString()) }
+            homeModel.description.let { binding.addDescription.setText(it) }
+            binding.checkPark.isChecked = homeModel.park
+            binding.checkSchool.isChecked = homeModel.school
+            binding.checkShop.isChecked = homeModel.shops
+            binding.checkTrain.isChecked = homeModel.station
+            binding.editInCharge.setText(homeModel.sellerName)
         }
-        homeModel?.bathRoomNumber?.let { binding.addBathRoom.setText(it.toString()) }
-        homeModel?.roomNumber?.let { binding.addRoom.setText(it.toString()) }
-        homeModel?.bedRoomNumber?.let { binding.addBedRoom.setText(it.toString()) }
-        homeModel?.surface?.let { binding.addSurface.setText(it.toString()) }
-        homeModel?.street?.let { binding.addStreet.setText(it) }
-        homeModel?.country?.let { binding.addCountry.setText(it) }
-        homeModel?.city?.let { binding.addCity.setText(it) }
-        homeModel?.postalCode?.let { binding.addPostal.setText(it) }
-        homeModel?.price?.let { binding.addPrice.setText(it.toString()) }
-        homeModel?.description?.let { binding.addDescription.setText(it) }
     }
 
     //intent to search photos
     private fun photoIntent() {
-        var photoIntent: Intent? = Intent(this, PhotoActivity::class.java)
+        val photoIntent: Intent? = Intent(this, PhotoActivity::class.java)
         startActivity(photoIntent)
     }
 
     //update the list
     private fun initList(listPhoto: MutableList<PhotoModel>) {
-        var recyclerView = binding.recyclerViewPhotoAdd
+        val recyclerView = binding.recyclerViewPhotoAdd
         recyclerView.adapter = PhotoRecyclerVIewAdapter(listPhoto)
     }
 
@@ -201,6 +212,7 @@ class EditActivity : AppCompatActivity() {
         callBackBathRoom = binding.addBathRoom.text.toString()
         callBackDescription = binding.addDescription.text.toString()
         callBackBedRoom = binding.addBedRoom.text.toString()
+        callBackAgent = binding.editInCharge.text.toString()
         if (binding.addAppartment.visibility != GONE) {
             callBackApartment = binding.addAppartment.text.toString()
         }
@@ -255,6 +267,11 @@ class EditActivity : AppCompatActivity() {
                 Toast.makeText(this, "Some information are not complete!", Toast.LENGTH_SHORT)
                     .show()
             }
+            callBackAgent.isBlank() ->{
+                binding.editInCharge.error = "need a value!"
+                Toast.makeText(this, "Some information are not complete!", Toast.LENGTH_SHORT)
+                    .show()
+            }
             else -> {
                 if (callBackMoneyType == "euro") {
                     callBackPrice = Utils.convertEuroToDollar(callBackPrice.toInt()).toString()
@@ -274,7 +291,12 @@ class EditActivity : AppCompatActivity() {
                     callBackBathRoom.toInt(),
                     callBackDescription,
                     callBackBedRoom.toInt(),
-                    callBackApartment
+                    callBackApartment,
+                    callBackAgent,
+                    binding.checkTrain.isChecked,
+                    binding.checkShop.isChecked,
+                    binding.checkSchool.isChecked,
+                    binding.checkPark.isChecked
                 )
                 createNotif()
                 this.finish()
@@ -297,7 +319,7 @@ class EditActivity : AppCompatActivity() {
         } else {
             viewModel?.home?.value?.isSold = true
             viewModel?.home?.value?.sellTime =
-                day.toString() + "/" + month.toString() + "/" + year.toString()
+                sellDate
             createNotif()
             viewModel?.home?.value?.let {
                 editViewModel?.editHome(
@@ -313,7 +335,12 @@ class EditActivity : AppCompatActivity() {
                     callBackBathRoom.toInt(),
                     callBackDescription,
                     callBackBedRoom.toInt(),
-                    callBackApartment
+                    callBackApartment,
+                    callBackAgent,
+                    binding.checkTrain.isChecked,
+                    binding.checkShop.isChecked,
+                    binding.checkSchool.isChecked,
+                    binding.checkPark.isChecked
                 )
             }
             finish()
@@ -327,8 +354,11 @@ class EditActivity : AppCompatActivity() {
         day = calendar.get(Calendar.DAY_OF_MONTH)
         // Date Select Listener.
         val dateSetListener =
-            DatePickerDialog.OnDateSetListener { _, year, _, dayOfMonth ->
-                binding.sellDateChosen.text = "$dayOfMonth/$month/$year"
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+                calendar.set(year, month, dayOfMonth)
+                sellDate = dateFormat.format(calendar.time)
+                binding.sellDateChosen.text = "Sold the  $sellDate. Confirm?"
             }
         // Create DatePickerDialog (Spinner Mode):
         val datePickerDialog = DatePickerDialog(

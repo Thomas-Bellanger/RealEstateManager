@@ -19,7 +19,6 @@ class HomeRecyclerViewAdapter(private val homes: List<HomeModel>) :
     RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>() {
 
     private var mContext: Context? = null
-    private val viewModel: ViewModel? = ViewModel.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

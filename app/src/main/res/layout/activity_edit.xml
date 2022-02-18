@@ -231,6 +231,41 @@
                 android:layout_gravity="center"
                 android:hint="Description" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/point_of_interest"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/checkSchool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/school"/>
+                <CheckBox
+                    android:id="@+id/checkShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shops"/>
+                <CheckBox
+                    android:id="@+id/checkPark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/park"/>
+                <CheckBox
+                    android:id="@+id/checkTrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/station"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/addPhotoBtn"
                 android:layout_width="wrap_content"
@@ -245,6 +280,13 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/media_list_item" />
+
+            <EditText
+                android:id="@+id/editInCharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/agent_in_charge"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

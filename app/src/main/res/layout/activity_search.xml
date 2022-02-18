@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
@@ -30,13 +30,13 @@
         android:id="@+id/searchAvailableBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Available"/>
+        android:text="@string/available"/>
 
     <CheckBox
         android:id="@+id/searchSoldBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sold"/>
+        android:text="@string/sold"/>
 
 </LinearLayout>
     <Spinner
@@ -50,7 +50,7 @@
         android:id="@+id/searchSurfaceMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Surface min"
+        android:hint="@string/surface_min"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -58,7 +58,7 @@
         android:id="@+id/searchSurfaceMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Surface max"
+        android:hint="@string/surface_max"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -66,7 +66,7 @@
         android:id="@+id/searchPriceMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Price max"
+        android:hint="@string/price_max"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -74,7 +74,7 @@
         android:id="@+id/searchRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Room number"
+        android:hint="@string/room_number"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -82,7 +82,7 @@
         android:id="@+id/searchBedRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Bedroom number"
+        android:hint="@string/bedroom_number"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -90,7 +90,7 @@
         android:id="@+id/searchBathRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Bathroom number"
+        android:hint="@string/bathroom_number"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -98,7 +98,7 @@
         android:id="@+id/searchPhotoMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Number of photo of the property min"
+        android:hint="@string/number_of_photo_of_the_property_min"
         android:layout_gravity="center"
         android:inputType="number"/>
 
@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Adress:"
+        android:text="@string/adress"
         android:textStyle="bold" />
 
     <EditText
@@ -114,35 +114,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="City" />
+        android:hint="@string/city" />
 
     <EditText
         android:id="@+id/searchStreet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Street" />
+        android:hint="@string/street" />
 
     <EditText
         android:id="@+id/searchPostal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Postal Code" />
+        android:hint="@string/postal_code" />
 
     <EditText
         android:id="@+id/searchCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="country" />
+        android:hint="@string/country" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/point_of_interest"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/checkSchool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/school"/>
+                <CheckBox
+                    android:id="@+id/checkShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shops"/>
+                <CheckBox
+                    android:id="@+id/checkPark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/park"/>
+                <CheckBox
+                    android:id="@+id/checkTrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/station"/>
+            </LinearLayout>
 
         <TextView
             android:id="@+id/searchDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Search for a date"/>
+            android:text="@string/search_for_a_date"/>
 
             <Button
                 android:id="@+id/searchConfirmBtn"
