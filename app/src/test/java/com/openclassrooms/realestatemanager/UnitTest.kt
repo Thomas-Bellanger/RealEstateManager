@@ -1,10 +1,19 @@
 package com.openclassrooms.realestatemanager
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import com.openclassrooms.realestatemanager.model.HomeModel
 import com.openclassrooms.realestatemanager.model.LocationModel
 import com.openclassrooms.realestatemanager.model.PhotoModel
 import com.openclassrooms.realestatemanager.utils.Utils
+import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowNetworkInfo
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,6 +23,7 @@ import java.util.*
  *
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
+@RunWith(RobolectricTestRunner::class)
 class UnitTest {
     var listHomeTest: MutableList<HomeModel> = ArrayList()
     var listPhotoTest: MutableList<PhotoModel> = ArrayList()
@@ -237,5 +247,49 @@ class UnitTest {
     @Test
     fun testLocationUid() {
         assert(testLocation.homeUid == 1L)
+    }
+
+    @Test
+    fun testConnexionCheck() {
+        val connectivityManager = RuntimeEnvironment.getApplication()
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val shadowConnectivityManager = shadowOf(connectivityManager)
+        val shadowOfActiveNetworkInfo = shadowOf(connectivityManager.getActiveNetworkInfo())
+        val networkInfo = ShadowNetworkInfo.newInstance(
+            NetworkInfo.DetailedState.CONNECTED,
+            ConnectivityManager.TYPE_WIFI,
+            0,
+            true,
+            true
+        )
+        // Correct API call: use setActiveNetworkInfo instead of setNetworkInfo
+        shadowConnectivityManager.setActiveNetworkInfo(networkInfo)
+        val activeInfo: NetworkInfo = connectivityManager.getActiveNetworkInfo()
+        Assert.assertTrue(activeInfo.isConnected)
+
+        shadowOfActiveNetworkInfo.setAvailableStatus(true)
+        assert(Utils.isConnected(RuntimeEnvironment.getApplication()))
+    }
+
+    @Test
+    fun testConnexionCheckFalse() {
+        val connectivityManager = RuntimeEnvironment.getApplication()
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val shadowConnectivityManager = shadowOf(connectivityManager)
+        val shadowOfActiveNetworkInfo = shadowOf(connectivityManager.getActiveNetworkInfo())
+        val networkInfo = ShadowNetworkInfo.newInstance(
+            NetworkInfo.DetailedState.DISCONNECTED,
+            ConnectivityManager.TYPE_WIFI,
+            0,
+            true,
+            false
+        )
+        // Correct API call: use setActiveNetworkInfo instead of setNetworkInfo
+        shadowConnectivityManager.setActiveNetworkInfo(networkInfo)
+        val activeInfo: NetworkInfo = connectivityManager.getActiveNetworkInfo()
+        Assert.assertFalse(activeInfo.isConnected)
+
+        shadowOfActiveNetworkInfo.setAvailableStatus(false)
+        assert(!Utils.isConnected(RuntimeEnvironment.getApplication()))
     }
 }
