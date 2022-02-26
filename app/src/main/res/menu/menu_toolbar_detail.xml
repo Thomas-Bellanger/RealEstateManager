@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/convert"
+        android:icon="@drawable/baseline_attach_money_green_a700_24dp"
+        android:title="@string/convert"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/baseline_mode_edit_white_24dp"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom" />
+</menu>
