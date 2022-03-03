@@ -252,7 +252,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewFragment.Callbacks {
     //intent for detail fragment and detail activity (if screen size is < 600dp)
     override fun onClickResponse(home: HomeModel) {
         dataViewModel?.getPhotos(home.uid)?.observe(this, this::comparePhoto)
-        viewModel!!.home.value = home
+        viewModel?.home?.value = home
         if (detailFragment == null && this.findViewById<FrameLayout>(R.id.frameLayoutDetail) == null) {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)

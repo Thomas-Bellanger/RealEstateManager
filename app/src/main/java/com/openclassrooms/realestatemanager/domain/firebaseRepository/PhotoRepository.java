@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -55,7 +56,6 @@ public class PhotoRepository {
     }
 
     public UploadTask uploadImage(Uri imageUri, String homeUid, String id) {
-        String uuid = id; // GENERATE UNIQUE STRING
         StorageReference mImageRef = FirebaseStorage.getInstance().getReference(homeUid + "/" + id);
         return mImageRef.putFile(imageUri);
     }
@@ -63,15 +63,8 @@ public class PhotoRepository {
     public void deleteImage(String imageUri) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference photoRef = firebaseStorage.getReferenceFromUrl(imageUri);
-        photoRef.delete().addOnSuccessListener(aVoid -> {
-            // File deleted successfully
-            Log.d("TAG", "onSuccess: deleted file");
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Uh-oh, an error occurred!
-                Log.d("TAG", "onFailure: did not delete file");
-            }
+        photoRef.delete().addOnSuccessListener(unused -> {
+            //deleted
         });
     }
 

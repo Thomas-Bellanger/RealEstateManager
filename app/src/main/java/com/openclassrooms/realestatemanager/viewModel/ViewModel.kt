@@ -38,8 +38,6 @@ class ViewModel {
     var avatar: String = ""
     private val NOTIFICATION_ID = 7
     private val NOTIFICATION_TAG = "RealEstateManager"
-    var location: MutableLiveData<LocationModel> =
-        MutableLiveData<LocationModel>()
 
     //instance
     companion object {
@@ -205,7 +203,6 @@ class ViewModel {
             }
         } else {
             val imageUri = Uri.parse(photoModel.image)
-            Log .e("uri", ""+imageUri)
             photoManager.changeImageForUrl(
                 imageUri,
                 photoModel,

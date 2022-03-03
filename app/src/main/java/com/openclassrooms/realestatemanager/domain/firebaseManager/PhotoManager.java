@@ -44,8 +44,9 @@ public class PhotoManager {
         photoRepository.getPhotoData(uid).addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot != null) {
                 PhotoModel photoToDelete = documentSnapshot.toObject(PhotoModel.class);
-                photoRepository.deleteImage(photoToDelete.getImage());
+                assert photoToDelete != null;
                 photoRepository.deletePhotoFromFirestore(photoToDelete.getUid());
+                photoRepository.deleteImage(photoToDelete.getImage());
             }
         });
     }

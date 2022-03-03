@@ -120,7 +120,7 @@ class DetailFragment : Fragment() {
             sellTime.visibility = VISIBLE
             sellTime.text = "Date of sale:" + home.sellTime
         }
-        dataViewModel?.getLocation(home.uid)?.observe(this, this::checkUrl)
+        dataViewModel?.getLocation(home.uid)?.observe(this, this::getStaticMap)
         if(home.park){
             view?.findViewById<ImageView>(R.id.parkIcon)?.visibility = VISIBLE
         }
@@ -132,16 +132,6 @@ class DetailFragment : Fragment() {
         }
         if(home.station){
             view?.findViewById<ImageView>(R.id.trainIcon)?.visibility = VISIBLE
-        }
-    }
-
-    private fun checkUrl(location: LocationModel){
-        viewModel?.location?.observe(this.viewLifecycleOwner, this::getStaticMap)
-        if ((location.lat == null||location.lng==null) && Utils.isConnected(context)) {
-            dataViewModel?.createLocation(viewModel?.home?.value, context)
-        }
-        else {
-            viewModel?.location?.value = location
         }
     }
 
