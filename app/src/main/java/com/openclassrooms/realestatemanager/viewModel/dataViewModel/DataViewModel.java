@@ -162,6 +162,7 @@ public class DataViewModel extends ViewModel implements MapQuestRepository.Callb
         locationModel.setLng(lng);
         executor.execute(() -> {
             locationDataRepository.createLocation(locationModel);
+            viewModel.getLocation().setValue(locationModel);
         });
     }
 
